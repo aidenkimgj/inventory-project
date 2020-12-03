@@ -1,0 +1,112 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333333;
+  padding: 8px 5px; }
+
+.navbar_logo {
+  margin-left: 3%;
+  font-size: 30px;
+  color: white; }
+
+/*.navbar_logo i {
+  color: rgb(124, 135, 182);
+}*/
+.navbar_menu {
+  margin-right: 7%;
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  font-size: 20px;
+  font-weight: bolder; }
+
+.navbar_menu li {
+  padding: 8px 12px; }
+
+.navbar_menu li a:hover {
+  color: #10abe8;
+  font-weight: bold; }
+
+.navbar_icons {
+  margin-right: 3%;
+  list-style: none;
+  color: white;
+  display: flex; }
+
+.navbar_icons li {
+  padding: 8px 8px; }
+
+.navbar_toogleBtn {
+  display: none;
+  position: absolute;
+  right: 32px;
+  font-size: 24px;
+  color: #7c87b6; }
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  z-index: 1; }
+  .container h1 {
+    margin: 0;
+    position: relative;
+    padding-top: 200px;
+    font-size: 50px;
+    text-align: center;
+    color: #0095ff; }
+  .container a {
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    display: block;
+    margin-top: 10%;
+    background-color: #ffdd1f;
+    padding: 20px;
+    border-radius: 5px;
+    transition: background-color 500ms ease-in-out; }
+    .container a:hover {
+      background-color: #5e5a41; }
+
+.container::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-image: url("../images/main_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.5; }
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333333;
+  padding: 50px 10px;
+  color: white; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif; }
+
+a {
+  text-decoration: none;
+  color: white; }
+
+/*# sourceMappingURL=base.css.map */

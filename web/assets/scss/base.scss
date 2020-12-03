@@ -1,0 +1,23 @@
+@import './variables';
+@import './navigation';
+@import './home';
+@import './footer';
+@import './login';
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+  height: 100%;  
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+a {
+  text-decoration: none;
+  color: $default-color;
+}

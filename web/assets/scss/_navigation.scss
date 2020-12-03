@@ -1,0 +1,55 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background;
+  padding: 8px 5px;
+}
+
+.navbar_logo {
+  margin-left: 3%;  
+  font-size: 30px;
+  color: $default-color;
+}
+
+/*.navbar_logo i {
+  color: rgb(124, 135, 182);
+}*/
+
+.navbar_menu {
+  margin-right: 7%;
+  display: flex;
+  list-style: none;    
+  padding-left:0;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.navbar_menu li {
+  padding: 8px 12px;   
+}
+
+.navbar_menu li a:hover {
+  color: #10abe8;
+  font-weight: bold;
+  
+}
+
+.navbar_icons {
+  margin-right: 3%;
+  list-style: none;
+  color: white;
+  display: flex;
+}
+
+.navbar_icons li {
+  padding: 8px 8px;
+}
+
+.navbar_toogleBtn {
+  display: none;
+  position: absolute;
+  right: 32px;
+  font-size: 24px;
+  color: rgb(124, 135, 182);
+}
