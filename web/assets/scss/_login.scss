@@ -1,0 +1,73 @@
+.login_container {
+    display: flex;
+    flex-direction: row;   
+    justify-content: center;
+    align-items: center;
+    width: 340px;
+    height: 70vh;
+    text-align: center;
+    margin: auto;
+}
+
+.login_intro i {
+    font-size: 30px;
+}
+.login_input_div p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+    margin-left: -190px;
+    a {
+        position: relative;
+        margin-left: 90px;
+        color: $link_color;
+        font-size: smaller;
+    }
+}
+#password p {
+    margin-left: 0px;
+}
+
+.login_input_div input {
+    border: none;
+    border-bottom: solid 1px $basic_color;
+    outline: none;
+    width: 280px;
+    padding: 4px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+.submit_div {
+    margin-top: 20px;
+    input {
+        width: 280px;
+        padding: 10px;
+        border-style: none;
+        border-radius: 5px;
+        font-size: 20px;
+        background-color: $button_color1;
+        color: $default-color;
+        &:hover {
+            background-color: $button_color2;
+        }
+    }
+}
+
+.create_account {
+    margin-top: 20px;
+    p {
+        font-size: smaller; 
+        a{
+            padding-left: 5px;
+            color: $link_color;
+        }
+    }
+}
+
+.login_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $background;
+}

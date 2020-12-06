@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Nov 28, 2020, 8:24:33 PM
-    Author     : 837033
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,16 +24,16 @@
                 </ul>
 
                 <ul class="navbar_icons">
-                    <li><i class="fab fa-instagram"></i></li>
-                    <li><i class="fab fa-twitter"></i></li>
-                    <li><i class="fab fa-facebook-square"></i></li>
+                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
                 </ul>
                 <a href="#" class="navbar_toogleBtn">
                     <i class="fas fa-bars"></i>
                 </a>
             </nav>
         </header>
-        <div class="container">
+        <div class="home_container">
             <h1>Would you want to create inventory?</h1>
             <a href="login">Go to Inventory</a>
         </div>

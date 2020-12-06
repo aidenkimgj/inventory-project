@@ -3,6 +3,8 @@
 @import './home';
 @import './footer';
 @import './login';
+@import './create-account';
+@import './reset';
 
 html {
     box-sizing: border-box;
@@ -13,7 +15,7 @@ html {
 }
 
 body {
-  height: 100%;  
+  height: 100vh;  
   margin: 0;
   font-family: 'Source Sans Pro', sans-serif;
 }

@@ -35,37 +35,47 @@
             </nav>
         </header>
         
-        <div class="login_container">
-                      
-            <form action="login" method="post">
-                <div class="login_intro">
+        <div class="create_container">
+            <form action="create" method="post">
+                <div class="create_intro">
                     <i class="fas fa-laptop-house"></i>
-                    <h2>Log in to HOME Inventory</h2>
+                    <h2>Create your Account</h2>
                 </div>
-                
-                <div class="login_div">
-                    <div class="login_input_div">
+                <div class="create_div">
+                    <div class="create_input_div">
+                        <p> First name </p>
+                        <input type="text" name="firstname" placeholder="Enter First name"/>
+                    </div>
+                    
+                    <div class="create_input_div">
+                        <p> Last name </p>
+                        <input type="text" name="lastname" placeholder="Enter Last name"/>
+                    </div>
+                    
+                    <div class="create_input_div">
                         <p> Username </p>
                         <input type="text" name="username" placeholder="Enter Username"/>
                     </div>
                     
-                    <div class="login_input_div" id="password">
-                        <p> Password <a class="forgot_password" href="reset">Forgot password?</a></p>
+                    <div class="create_input_div">
+                        <p> Email </p>
+                        <input type="text" name="email" placeholder="Enter Email"/>
+                    </div>
+                    
+                    <div class="create_input_div">
+                        <p> Password </p>
                         <input type="password" name="password" placeholder="Enter Password"/>    
                     </div>
                    
                     <div class="submit_div">
-                        <input type="submit" value="Login">
+                        <input type="submit" value="Create account">
                     </div>
-                </div>
-                <div class="create_account">
-                <p>New to HOME Inventory? <a href="create">Create an account.</a> </p>
-            </div>
+                </div>    
             </form>
-                  
+
         </div>
         
-        <footer class="login_footer">
+        <footer>
             <h3>Copyright © Aiden's Inventory Service</h3>
         </footer>
     </body>

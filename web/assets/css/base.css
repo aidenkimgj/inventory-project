@@ -44,20 +44,20 @@
   font-size: 24px;
   color: #7c87b6; }
 
-.container {
-  width: 100vw;
-  height: 100vh;
+.home_container {
+  width: 100%;
+  height: 75.6vh;
   text-align: center;
   position: relative;
   z-index: 1; }
-  .container h1 {
+  .home_container h1 {
     margin: 0;
     position: relative;
     padding-top: 200px;
     font-size: 50px;
     text-align: center;
     color: #0095ff; }
-  .container a {
+  .home_container a {
     margin-left: 40%;
     margin-right: 40%;
     text-align: center;
@@ -70,12 +70,12 @@
     padding: 20px;
     border-radius: 5px;
     transition: background-color 500ms ease-in-out; }
-    .container a:hover {
-      background-color: #5e5a41; }
+    .home_container a:hover {
+      background-color: #ecd554; }
 
-.container::after {
+.home_container::after {
   width: 100%;
-  height: 100%;
+  height: 75.6vh;
   content: "";
   background-image: url("../images/main_background.jpg");
   background-repeat: no-repeat;
@@ -94,6 +94,98 @@ footer {
   padding: 50px 10px;
   color: white; }
 
+.login_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  height: 70vh;
+  text-align: center;
+  margin: auto; }
+
+.login_intro i {
+  font-size: 30px; }
+
+.login_input_div p {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+  margin-left: -190px; }
+  .login_input_div p a {
+    position: relative;
+    margin-left: 90px;
+    color: #10abe8;
+    font-size: smaller; }
+
+#password p {
+  margin-left: 0px; }
+
+.login_input_div input {
+  border: none;
+  border-bottom: solid 1px #ababab;
+  outline: none;
+  width: 280px;
+  padding: 4px;
+  margin-top: -10px;
+  margin-bottom: 5px; }
+
+.submit_div {
+  margin-top: 20px; }
+  .submit_div input {
+    width: 280px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: #ffdd1f;
+    color: white; }
+    .submit_div input:hover {
+      background-color: #ecd554; }
+
+.create_account {
+  margin-top: 20px; }
+  .create_account p {
+    font-size: smaller; }
+    .create_account p a {
+      padding-left: 5px;
+      color: #10abe8; }
+
+.login_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #333333; }
+
+.create_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  height: 80vh;
+  text-align: center;
+  margin: auto; }
+
+.create_intro i {
+  margin-top: 3%;
+  font-size: 30px; }
+
+.create_input_div p {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left;
+  margin-left: 10px; }
+
+.create_input_div input {
+  border: none;
+  border-bottom: solid 1px #ababab;
+  outline: none;
+  width: 280px;
+  padding: 4px;
+  margin-top: -10px;
+  margin-bottom: 5px; }
+
 html {
   box-sizing: border-box; }
 
@@ -101,7 +193,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   font-family: 'Source Sans Pro', sans-serif; }
 
