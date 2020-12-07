@@ -21,13 +21,15 @@
                     <li><a href="account">Account</a></li>
                     <li><a href="admin">Admin</a></li>
                     <li><a href="inventory">Inventory</a></li>
-                    <li><a href="login">Login</a></li>
+                    <c:if test="${username == null}">
+                        <li><a href="login">Login</a></li>
+                    </c:if>
                 </ul>
 
                 <ul class="navbar_icons">
                     <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
+                    <li><a class="twitter" href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
+                    <li><a class="facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
                 </ul>
                 <a href="#" class="navbar_toogleBtn">
                     <i class="fas fa-bars"></i>

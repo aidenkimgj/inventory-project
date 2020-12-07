@@ -1,9 +1,13 @@
 .navbar {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #333333;
-  padding: 8px 5px; }
+  position: fixed;
+  padding: 8px 5px;
+  z-index: 100;
+  top: 0; }
 
 .navbar_logo {
   margin-left: 3%;
@@ -37,6 +41,12 @@
 .navbar_icons li {
   padding: 8px 8px; }
 
+.twitter:hover {
+  color: #10abe8; }
+
+.facebook:hover {
+  color: #256fe6; }
+
 .navbar_toogleBtn {
   display: none;
   position: absolute;
@@ -45,15 +55,16 @@
   color: #7c87b6; }
 
 .home_container {
+  top: 97px;
+  bottom: 150.433px;
   width: 100%;
-  height: 75.6vh;
   text-align: center;
-  position: relative;
+  position: absolute;
   z-index: 1; }
   .home_container h1 {
     margin: 0;
     position: relative;
-    padding-top: 200px;
+    padding-top: 15vh;
     font-size: 50px;
     text-align: center;
     color: #0095ff; }
@@ -65,7 +76,7 @@
     font-weight: bold;
     position: relative;
     display: block;
-    margin-top: 10%;
+    margin-top: 15vh;
     background-color: #ffdd1f;
     padding: 20px;
     border-radius: 5px;
@@ -75,11 +86,12 @@
 
 .home_container::after {
   width: 100%;
-  height: 75.6vh;
+  height: 100%;
   content: "";
   background-image: url("../images/main_background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   position: absolute;
   top: 0;
   left: 0;
@@ -91,18 +103,24 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: #333333;
-  padding: 50px 10px;
-  color: white; }
+  padding: 45px 10px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
 
 .login_container {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 340px;
-  height: 70vh;
+  height: 69vh;
   text-align: center;
-  margin: auto; }
+  margin: auto;
+  top: 97px;
+  bottom: 150.433px; }
 
 .login_intro i {
   font-size: 30px; }
@@ -110,16 +128,16 @@ footer {
 .login_input_div p {
   font-weight: bold;
   margin-bottom: 8px;
-  text-align: center;
-  margin-left: -190px; }
+  text-align: left;
+  margin-left: 0px; }
   .login_input_div p a {
     position: relative;
-    margin-left: 90px;
+    margin-left: 110px;
     color: #10abe8;
     font-size: smaller; }
 
-#password p {
-  margin-left: 0px; }
+#active_account {
+  margin-left: 92px; }
 
 .login_input_div input {
   border: none;
@@ -128,7 +146,8 @@ footer {
   width: 280px;
   padding: 4px;
   margin-top: -10px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  background-color: #f5f5f5; }
 
 .submit_div {
   margin-top: 20px; }
@@ -151,21 +170,18 @@ footer {
       padding-left: 5px;
       color: #10abe8; }
 
-.login_footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: #333333; }
-
 .create_container {
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 340px;
-  height: 80vh;
+  height: 69vh;
   text-align: center;
-  margin: auto; }
+  margin: auto;
+  top: 97px;
+  bottom: 150.433px; }
 
 .create_intro i {
   margin-top: 3%;
@@ -174,8 +190,7 @@ footer {
 .create_input_div p {
   font-weight: bold;
   margin-bottom: 8px;
-  text-align: left;
-  margin-left: 10px; }
+  text-align: left; }
 
 .create_input_div input {
   border: none;
@@ -184,7 +199,83 @@ footer {
   width: 280px;
   padding: 4px;
   margin-top: -10px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  background-color: #f5f5f5; }
+
+.reset_mention {
+  color: red;
+  font-style: italic;
+  font-weight: 100; }
+
+.reset_input_div input {
+  border: none;
+  border-bottom: solid 1px #ababab;
+  outline: none;
+  width: 280px;
+  padding: 4px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5; }
+
+.reset_input_div p {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left;
+  margin-left: 30px; }
+
+.admin_container {
+  top: 97px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .admin_container .admin_title {
+    margin-top: 3vh;
+    font-size: 20px; }
+  .admin_container .user_table {
+    margin-top: 6vh; }
+    .admin_container .user_table table {
+      width: 70vw;
+      text-align: center; }
+
+.user_table th, td {
+  border: 1px solid black;
+  padding: 5px;
+  color: black; }
+
+.user_table th {
+  background-color: #ffdd1f;
+  font-size: 18px;
+  font-weight: bolder; }
+
+.user_table td {
+  font-weight: lighter;
+  font-size: 15px; }
+
+.user_table tr:nth-child(even) {
+  background-color: #f5ee9d; }
+
+.edit_form {
+  position: relative;
+  display: block;
+  margin-top: 10vh;
+  padding-bottom: 500px; }
+
+.admin_input_div p {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left; }
+
+.admin_input_div input {
+  border: none;
+  border-bottom: solid 1px #ababab;
+  outline: none;
+  width: 280px;
+  padding: 4px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5; }
 
 html {
   box-sizing: border-box; }
@@ -193,9 +284,10 @@ html {
   box-sizing: inherit; }
 
 body {
-  height: 100vh;
   margin: 0;
-  font-family: 'Source Sans Pro', sans-serif; }
+  height: 100vh;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #f5f5f5; }
 
 a {
   text-decoration: none;

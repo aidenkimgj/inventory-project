@@ -5,6 +5,7 @@
 @import './login';
 @import './create-account';
 @import './reset';
+@import './admin';
 
 html {
     box-sizing: border-box;
@@ -15,9 +16,10 @@ html {
 }
 
 body {
-  height: 100vh;  
   margin: 0;
+  height: 100vh;
   font-family: 'Source Sans Pro', sans-serif;
+  background-color: $background_color;
 }
 a {
   text-decoration: none;

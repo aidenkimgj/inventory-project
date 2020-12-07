@@ -1,0 +1,71 @@
+.admin_container {
+    top: 97px;
+    position: relative;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+    .admin_title {
+        margin-top: 3vh;
+        font-size: 20px;
+    }
+    .user_table {
+        margin-top: 6vh;
+    
+        table {
+            width: 70vw;
+            text-align: center;
+        }
+    }  
+}
+
+
+
+.user_table th, td {
+    border: 1px solid black;
+    padding: 5px;
+    color: black;
+}
+
+.user_table th {
+    background-color: $button_color1;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.user_table td {
+    font-weight: lighter;
+    font-size: 15px;
+}
+.user_table tr:nth-child(even) {
+    background-color: #f5ee9d;
+}
+
+.edit_form {
+    position: relative;
+    display: block;
+    margin-top: 10vh;
+    padding-bottom: 500px;
+    
+}
+
+.admin_input_div p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: left;
+      
+}
+
+
+.admin_input_div input {
+    border: none;
+    border-bottom: solid 1px $basic_color;
+    outline: none;
+    width: 280px;
+    padding: 4px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    background-color: $background_color;
+    
+}
+
+

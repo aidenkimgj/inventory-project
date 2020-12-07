@@ -24,7 +24,6 @@
                     <c:if test="${username == null}">
                         <li><a href="login">Login</a></li>
                     </c:if>
-                    
                 </ul>
 
                 <ul class="navbar_icons">
@@ -37,38 +36,29 @@
                 </a>
             </nav>
         </header>
-        
         <div class="login_container">
-                      
-            <form action="login" method="post">
+            <form action="reset" method="post">
                 <div class="login_intro">
                     <i class="fas fa-laptop-house"></i>
-                    <h2>Log in to HOME Inventory</h2>
+                    <h2>Activate Account</h2>
                 </div>
                 
-                <div class="login_div">
-                    <div class="login_input_div">
-                        <p> Username <a id="active_account" href="active">Non-active account?</a></p>
-                        <input type="text" name="username" placeholder="Enter Username"/>
-                    </div>
-                    
-                    <div class="login_input_div" id="password">
-                        <p> Password <a class="forgot_password" href="reset">Forgot password?</a></p>
-                        <input type="password" name="password" placeholder="Enter Password"/>    
-                    </div>
-                   
-                    <div class="submit_div">
-                        <input type="submit" value="Login">
-                    </div>
+                <div class="reset_mention">
+                    <p>Please enter your email address which is registered in our service to reset your password.</p>
                 </div>
-                <div class="create_account">
-                <p>New to HOME Inventory? <a href="create">Create an account.</a> </p>
-            </div>
-            </form>
-                  
+
+                <div class="reset_input_div">
+                    <p> Email </p>
+                    <input type="text" name="email" placeholder="Enter your email"/>
+                </div>
+
+                <div class="submit_div">
+                    <input type="submit" value="Submit">
+                </div>
+             </form>
         </div>
-        
-        <footer class="login_footer">
+                       
+        <footer> 
             <h3>Copyright © Aiden's Inventory Service</h3>
         </footer>
     </body>

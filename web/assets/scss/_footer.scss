@@ -2,8 +2,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $background;
-        padding: 50px 10px;
+        background-color: $headerColor;
+        padding: 45px 10px;
         color: $default-color;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 

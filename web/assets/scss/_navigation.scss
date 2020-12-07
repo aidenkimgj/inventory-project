@@ -1,9 +1,13 @@
 .navbar {
+  width: 100%;  
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $background;
+  background-color: $headerColor;
+  position: fixed;
   padding: 8px 5px;
+  z-index: 100;
+  top: 0;
 }
 
 .navbar_logo {
@@ -42,8 +46,16 @@
   display: flex;
 }
 
+
 .navbar_icons li {
   padding: 8px 8px;
+}
+.twitter:hover {
+    color: $link_color;
+}
+
+.facebook:hover {
+      color: #256fe6; 
 }
 
 .navbar_toogleBtn {
