@@ -82,7 +82,7 @@
     border-radius: 5px;
     transition: background-color 500ms ease-in-out; }
     .home_container a:hover {
-      background-color: #ecd554; }
+      background-color: #f5ee9d; }
 
 .home_container::after {
   width: 100%;
@@ -160,7 +160,12 @@ footer {
     background-color: #ffdd1f;
     color: white; }
     .submit_div input:hover {
-      background-color: #ecd554; }
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFA41C), color-stop(0.59, #FFD900), color-stop(1, #FFA938));
+      background-image: -o-linear-gradient(bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%);
+      background-image: -moz-linear-gradient(bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%);
+      background-image: -webkit-linear-gradient(bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%);
+      background-image: -ms-linear-gradient(bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%);
+      background-image: linear-gradient(to bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%); }
 
 .create_account {
   margin-top: 20px; }
@@ -232,35 +237,61 @@ footer {
   align-items: center; }
   .admin_container .admin_title {
     margin-top: 3vh;
-    font-size: 20px; }
+    font-size: 20px;
+    font-weight: bolder;
+    color: #10abe8; }
   .admin_container .user_table {
-    margin-top: 6vh; }
+    margin-top: 3vh; }
     .admin_container .user_table table {
       width: 70vw;
       text-align: center; }
+  .admin_container .category_table {
+    margin-top: 3vh; }
+    .admin_container .category_table table {
+      width: 50vw;
+      text-align: center; }
 
-.user_table th, td {
-  border: 1px solid black;
+.admin_header {
+  text-align: center; }
+
+.admin_menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+  font-weight: bolder; }
+
+.admin_menu li {
+  padding: 8px 12px; }
+  .admin_menu li a {
+    color: #34d1af; }
+
+.admin_menu li a:hover {
+  color: #23a68a;
+  font-weight: bold; }
+
+.user_table td {
+  /*    border: 1px solid black;*/
   padding: 5px;
   color: black; }
 
 .user_table th {
   background-color: #ffdd1f;
   font-size: 18px;
-  font-weight: bolder; }
+  font-weight: bolder;
+  border-style: none; }
 
 .user_table td {
   font-weight: lighter;
   font-size: 15px; }
 
-.user_table tr:nth-child(even) {
+.user_table tr:nth-child(odd) {
   background-color: #f5ee9d; }
 
-.edit_form {
+.edit_user_form {
   position: relative;
-  display: block;
-  margin-top: 10vh;
-  padding-bottom: 500px; }
+  margin-top: 3vh; }
 
 .admin_input_div p {
   font-weight: bold;
@@ -277,6 +308,37 @@ footer {
   margin-bottom: 5px;
   background-color: #f5f5f5; }
 
+.category_table td, th {
+  /*    border: 1px solid black;*/
+  padding: 5px;
+  color: black; }
+
+.category_table th {
+  background-color: #ffdd1f;
+  font-size: 18px;
+  font-weight: bolder; }
+
+.category_table td {
+  font-weight: lighter;
+  font-size: 15px; }
+
+.category_table tr:nth-child(odd) {
+  background-color: #f5ee9d; }
+
+.edit_category_form {
+  position: relative;
+  margin-top: 3vh;
+  padding-bottom: 200px; }
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 8, 2020, 11:04:46 AM
+    Author     : 837033
+*/
 html {
   box-sizing: border-box; }
 

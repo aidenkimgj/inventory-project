@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>AccountServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>InventoryServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>AdminServlet</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
@@ -17,8 +33,8 @@
         <servlet-class>servlets.ResetPasswordServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AccountServlet</servlet-name>
-        <servlet-class>servlets.AccountServlet</servlet-class>
+        <servlet-name>ActiveServlet</servlet-name>
+        <servlet-class>servlets.ActiveServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
@@ -27,6 +43,10 @@
     <servlet>
         <servlet-name>InventoryServlet</servlet-name>
         <servlet-class>servlets.InventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>servlets.AccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -45,7 +65,7 @@
         <url-pattern>/reset</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AccountServlet</servlet-name>
+        <servlet-name>ActiveServlet</servlet-name>
         <url-pattern>/active</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -55,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>InventoryServlet</servlet-name>
         <url-pattern>/inventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

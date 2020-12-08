@@ -6,6 +6,7 @@
     <class>models.Items</class>
     <class>models.Users</class>
     <class>models.Categories</class>
+    <class>models.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

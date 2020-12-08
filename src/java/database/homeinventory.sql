@@ -22,6 +22,16 @@ CREATE SCHEMA IF NOT EXISTS `homeinventorydb` DEFAULT CHARACTER SET latin1 ;
 USE `homeinventorydb` ;
 
 -- -----------------------------------------------------
+-- Table `homeinventorydb`.`role`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `homeinventorydb`.`role` (
+  `Role_id` INT(11) NOT NULL,
+  `Role_name` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`role_id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `homeinventorydb`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `homeinventorydb`.`users` (
@@ -31,8 +41,12 @@ CREATE TABLE IF NOT EXISTS `homeinventorydb`.`users` (
   `FirstName` VARCHAR(50) NOT NULL,
   `LastName` VARCHAR(50) NOT NULL,
   `Active` BIT NOT NULL,
-  `IsAdmin` BIT NOT NULL,
-  PRIMARY KEY (`Username`))
+  `Role` INT(11) NOT NULL,
+  `ResetpasswordUUID` VARCHAR(50),
+  PRIMARY KEY (`Username`),
+  CONSTRAINT `fk_user_role`
+    FOREIGN KEY (`role`)
+    REFERENCES `homeinventorydb`.`role` (`role_id`))
 ENGINE = InnoDB;
 
 
@@ -86,10 +100,13 @@ INSERT INTO `categories` (`CategoryName`) VALUES ('utility room');
 INSERT INTO `categories` (`CategoryName`) VALUES ('storage');
 INSERT INTO `categories` (`CategoryName`) VALUES ('other');
 
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`IsAdmin`) VALUES ('admin','password','cprg352+admin@gmail.com','Admin','Admin',1,1);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`IsAdmin`) VALUES ('admin2','password','cprg352+admin2@gmail.com','Admin2','Admin2',0,1);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`IsAdmin`) VALUES ('anne','password','cprg352+anne@gmail.com','Anne','Annerson',1,0);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`IsAdmin`) VALUES ('barb','password','cprg352+barb@gmail.com','Barb','Barber',0,0);
+INSERT INTO `role` VALUES (1, 'system admin');
+INSERT INTO `role` VALUES (2, 'regular user');
+
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('admin','password','cprg352+admin@gmail.com','Admin','Admin',1,1);
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('admin2','password','cprg352+admin2@gmail.com','Admin2','Admin2',0,1);
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('anne','password','cprg352+anne@gmail.com','Anne','Annerson',1,2);
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('barb','password','cprg352+barb@gmail.com','Barb','Barber',0,2);
 
 INSERT INTO `items` (`Category`,`ItemName`,`Price`,`Owner`) VALUES (1,'blender',29.99,'anne');
 INSERT INTO `items` (`Category`,`ItemName`,`Price`,`Owner`) VALUES (1,'toaster',19.99,'anne');

@@ -41,17 +41,31 @@
             </nav>
         </header>
         <div class="admin_container">
-            <div class="admin_title">
-                <h2>Admin window</h2>
+           
+            <div class="admin_header">
+                <div class="admin_title">
+                     
+                    <h2>Admin menu for ${username}</h2>
+                </div>
+                <a name="ManageUsers"></a>
+                <ul class="admin_menu">
+                    <li><a href="#ManageUsers">Manage Users</a></li>
+                    <li><a href="#ManageCategories">Manage Categories</a></li>
+                </ul>
+                
             </div>
             
-            <div class="user_table">
+                
+            <div class="user_table">                
                 <h2>Manage Users</h2>
-                <table>
+                <table>                    
                     <tr>
                         <th>Username</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Active</th>
+                        <th>Role</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -60,17 +74,29 @@
                             <td>${user.username}</td>
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
+                            <td>${user.email}</td>
+                            <c:choose>
+                                <c:when test="${user.active == true}">
+                                    <td>on</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>off</td>
+                                </c:otherwise>    
+                            </c:choose>
+                            
+                            
+                            <td>${user.role.getRolename()}</td>
                             <td>
                                 <form action="admin" method="post" >
                                     <input type="submit" value="Delete">
-                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="action" value="u_delete">
                                     <input type="hidden" name="selectedUsername" value="${user.username}">
                                 </form>
                             </td>
                             <td>
                                 <form action="admin" method="get">
                                     <input type="submit" value="Edit">
-                                    <input type="hidden" name="action" value="view">
+                                    <input type="hidden" name="action" value="u_view">
                                     <input type="hidden" name="selectedUsername" value="${user.username}">
                                 </form>
                             </td>
@@ -78,10 +104,12 @@
                     </c:forEach>
                 </table>
             </div>
-            <div class="edit_form">
+                        
+            <div class="edit_user_form">
                 <c:if test="${selectedUser != null}">
-                    <h3>Edit User</h3>
+                    
                     <form action="admin" method="POST">
+                        <h3>Edit User</h3>
                         <div class="admin_input_div">
                             <p> Username </p>
                             <input type="text" name="username" value="${selectedUser.username}" readonly>
@@ -114,32 +142,121 @@
                                     <p> Active </p>
                                     <input type="checkbox" name="active" checked>
                                 </div>
-                                 <br>
-                            </c:when>
+                             </c:when>
                             <c:otherwise>
-                                Active: <input type="checkbox" name="active"><br>
+                                <div class="admin_input_div">
+                                    <p> Active </p>
+                                    <input type="checkbox" name="active"> 
+                                </div>
                             </c:otherwise>
                         </c:choose>
 
                         <c:choose>
-                            <c:when test="${selectedUser.isAdmin == true}">
-                                IsAdmin: <input type="checkbox" name="isadmin" checked><br>
+                            <c:when test="${selectedUser.role.getRoleid() == 1}">
+                                <div class="admin_input_div">
+                                    <p> Permission </p>
+                                    <input type="checkbox" name="isadmin" checked> 
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                IsAdmin: <input type="checkbox" name="isadmin"><br>
+                                <div class="admin_input_div">
+                                    <p> Permission </p>
+                                    <input type="checkbox" name="isadmin"> 
+                                </div>
                             </c:otherwise>
                         </c:choose>
 
-                        <input type="hidden" name="action" value="edit">
-                        <input type="submit" value="Save">
+                        <input type="hidden" name="action" value="user_edit">
+                        <div class="submit_div">
+                             <input type="submit" value="Save">
+                        </div>
+                       
                     </form>
                 </c:if>
             </div>
-       
+             
+            <div class="category_table">
+                <a name="ManageCategories"></a>
+                <h2>Manage Categories</h2>
+                <table>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Category ID</th>
+                        <th>Item Number</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                    <c:forEach var="category" items="${categories}">
+                        <tr>
+                            <td>${category.categoryName}</td>
+                            <td>${category.categoryID}</td>
+                            <td>${category.itemsList.size()}</td>
+                            <td>
+                                <form action="admin" method="post" >
+                                    <input type="submit" value="Delete">
+                                    <input type="hidden" name="action" value="c_delete">
+                                    <input type="hidden" name="selectedCategory" value="${category.categoryID}">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="admin" method="get">
+                                    <input type="submit" value="Edit">
+                                    <input type="hidden" name="action" value="c_view">
+                                    <input type="hidden" name="selectedCategory" value="${category.categoryID}">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+            
+            <div class="edit_category_form">
+                <c:if test="${selectedCategory == null}">
+                    
+                    <form action="admin" method="POST">
+                        <h3>Add Category</h3>
+                                             
+                        <div class="admin_input_div">
+                            <p> Category Name </p>
+                            <input type="text" name="categoryname">
+                        </div>
+
+                        <input type="hidden" name="action" value="category_add">
+                        <div class="submit_div">
+                             <input type="submit" value="Save">
+                        </div>
+                       
+                    </form>
+                </c:if>
+                
+                <c:if test="${selectedCategory != null}">
+                    
+                    <form action="admin" method="POST">
+                        <h3>Edit Category</h3>
+                        <div class="admin_input_div">
+                            <p> Category ID </p>
+                            <input type="text" name="categoryid" value="${selectedCategory.categoryID}" readonly>
+                        </div>
+                        
+                        <div class="admin_input_div">
+                            <p> Category Name </p>
+                            <input type="text" name="categoryname" value="${selectedCategory.categoryName}">
+                        </div>
+
+                        <input type="hidden" name="action" value="category_edit">
+                        <div class="submit_div">
+                             <input type="submit" value="Save">
+                        </div>
+                       
+                    </form>
+                </c:if>
+            </div>
+            
             <footer class="admin_footer">
                 <h3>Copyright © Aiden's Inventory Service</h3>
-            </footer>
+            </footer> 
+            
         </div>
-                   
+               
     </body>
 </html>

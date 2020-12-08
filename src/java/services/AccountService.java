@@ -1,15 +1,19 @@
 package services;
 
+import dataaccess.RoleDB;
 import dataaccess.UsersDB;
 import models.Users;
 import java.util.List;
+import models.Role;
 
 public class AccountService {
     
     private UsersDB userDB;
+    private RoleDB roleDB;
     
      public AccountService() {
         userDB = new UsersDB();
+        roleDB = new RoleDB();
     }
     public Users login(String username, String password) {
                
@@ -37,26 +41,28 @@ public class AccountService {
         }
         
         Users user = new Users(username);
+        Role role = roleDB.get(2);
         
         user.setPassword(password);
         user.setEmail(email);
         user.setFirstName(firstname);
         user.setLastName(lastname);
         user.setActive(true);
-        user.setIsAdmin(false);
+        user.setRole(role);
         
         return userDB.insert(user);
     }
 
-    public boolean update(String username, String password, String email, String firstname, String lastname, boolean active, boolean admin) throws Exception {
+    public boolean update(String username, String password, String email, String firstname, String lastname, boolean active, int admin) throws Exception {
         Users user = new Users(username);
+        Role role = roleDB.get(admin);
         
         user.setPassword(password);
         user.setEmail(email);
         user.setFirstName(firstname);
         user.setLastName(lastname);
         user.setActive(active);
-        user.setIsAdmin(admin);
+        user.setRole(role);
         
         return userDB.update(user);       
     }

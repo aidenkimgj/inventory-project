@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 837033
  */
-public class AccountServlet extends HttpServlet {
+public class ActiveServlet extends HttpServlet {
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/activation.jsp").forward(request, response);
     }
 
     

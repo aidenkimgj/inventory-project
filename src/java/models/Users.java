@@ -13,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")
-    , @NamedQuery(name = "Users.findByIsAdmin", query = "SELECT u FROM Users u WHERE u.isAdmin = :isAdmin")})
+    , @NamedQuery(name = "Users.findByResetpasswordUUID", query = "SELECT u FROM Users u WHERE u.resetpasswordUUID = :resetpasswordUUID")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,11 +60,13 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "Active")
     private boolean active;
-    @Basic(optional = false)
-    @Column(name = "IsAdmin")
-    private boolean isAdmin;
+    @Column(name = "ResetpasswordUUID")
+    private String resetpasswordUUID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Items> itemsList;
+    @JoinColumn(name = "Role", referencedColumnName = "Role_id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Role role;
 
     public Users() {
     }
@@ -71,14 +75,13 @@ public class Users implements Serializable {
         this.username = username;
     }
 
-    public Users(String username, String password, String email, String firstName, String lastName, boolean active, boolean isAdmin) {
+    public Users(String username, String password, String email, String firstName, String lastName, boolean active) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.active = active;
-        this.isAdmin = isAdmin;
     }
 
     public String getUsername() {
@@ -129,12 +132,12 @@ public class Users implements Serializable {
         this.active = active;
     }
 
-    public boolean getIsAdmin() {
-        return isAdmin;
+    public String getResetpasswordUUID() {
+        return resetpasswordUUID;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setResetpasswordUUID(String resetpasswordUUID) {
+        this.resetpasswordUUID = resetpasswordUUID;
     }
 
     @XmlTransient
@@ -144,6 +147,14 @@ public class Users implements Serializable {
 
     public void setItemsList(List<Items> itemsList) {
         this.itemsList = itemsList;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

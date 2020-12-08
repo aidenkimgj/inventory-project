@@ -31,5 +31,57 @@ public class CategoriesDB {
             em.close();
         }
     }
+
+    public boolean insert(Categories category) throws Exception {
+        em = DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.persist(category);
+            trans.commit();
+            return true;
+        } catch (Exception ex) {
+            trans.rollback();
+            throw new Exception("Error inserting item");
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean update(Categories category) throws Exception {
+            em = DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.merge(category);
+            trans.commit();
+            return true;
+        } catch (Exception ex) {
+            trans.rollback();
+            throw new Exception("Error updating category");
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean delete(Categories category) throws Exception{
+        em = DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+
+        try {
+           trans.begin();
+           em.remove(em.merge(category));
+           trans.commit();
+           return true;
+        } catch (Exception ex) {
+            trans.rollback();
+            throw new Exception("Error deleting Category");
+        } finally {
+            em.close();
+            
+        }
     
+    }
 }
