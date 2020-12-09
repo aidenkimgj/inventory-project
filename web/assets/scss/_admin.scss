@@ -5,18 +5,39 @@
     flex-direction: column;   
     justify-content: center;
     align-items: center;
+    
     .admin_title {
         margin-top: 3vh;
         font-size: 20px;
         font-weight: bolder;
         color: $link_color;
     }
+    
     .user_table {
         margin-top: 3vh;
-    
+        
         table {
             width: 70vw;
             text-align: center;
+            
+            th {
+                background-color: $button_color1;
+                font-size: 18px;
+                font-weight: bolder;
+                border-style: none;
+                padding: 5px;
+            }
+            
+            td {
+                font-weight: lighter;
+                font-size: 15px;
+                padding: 5px;
+                color: black;
+            }
+            
+            tr:nth-child(odd) {
+            background-color: $table_color;
+            }
         }
     }
     .category_table {
@@ -25,9 +46,29 @@
         table {
             width: 50vw;
             text-align: center;
+            
+            th {
+                background-color: $button_color1;
+                font-size: 18px;
+                font-weight: bolder;
+                padding: 5px;
+            }
+            
+            td {
+                font-weight: lighter;
+                font-size: 15px;
+                padding: 5px;
+            }
+            
+            tr:nth-child(odd) {
+                background-color: $table_color;
+            }
         }
     }
 }
+
+
+
 .admin_header {
     text-align: center;
 }
@@ -47,35 +88,13 @@
     }
 }
 
-
 .admin_menu li a:hover {
   color: #23a68a;
   font-weight: bold;
   
 }
 
-.user_table td {
-/*    border: 1px solid black;*/
-    padding: 5px;
-    color: black;
-}
-
-.user_table th {
-    background-color: $button_color1;
-    font-size: 18px;
-    font-weight: bolder;
-    border-style: none;
-    
-}
-.user_table td {
-    font-weight: lighter;
-    font-size: 15px;
-}
-.user_table tr:nth-child(odd) {
-    background-color: $table_color;
-}
-
-.edit_user_form {
+.user_form {
     position: relative;
     margin-top: 3vh;
 }
@@ -96,29 +115,9 @@
     margin-top: -10px;
     margin-bottom: 5px;
     background-color: $background_color;
-    
 }
 
-.category_table td, th {
-/*    border: 1px solid black;*/
-    padding: 5px;
-    color: black;
-}
-
-.category_table th {
-    background-color: $button_color1;
-    font-size: 18px;
-    font-weight: bolder;
-}
-.category_table td {
-    font-weight: lighter;
-    font-size: 15px;
-}
-.category_table tr:nth-child(odd) {
-    background-color: $table_color;
-}
-
-.edit_category_form {
+.category_form {
     position: relative;
     margin-top: 3vh;
     padding-bottom: 200px;

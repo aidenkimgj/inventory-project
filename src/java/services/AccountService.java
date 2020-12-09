@@ -70,7 +70,7 @@ public class AccountService {
     public boolean delete(String username) throws Exception {
         Users deletedUser = userDB.getUser(username);
         
-        if (deletedUser.getUsername().contains("admin")) {
+        if (deletedUser.getRole().getRoleid() == 1 && deletedUser.getRole().getRolename().equals("system admin")) {
             return false;
         }
         return userDB.delete(deletedUser);

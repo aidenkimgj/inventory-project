@@ -158,7 +158,8 @@ footer {
     border-radius: 5px;
     font-size: 20px;
     background-color: #ffdd1f;
-    color: white; }
+    color: white;
+    cursor: pointer; }
     .submit_div input:hover {
       background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFA41C), color-stop(0.59, #FFD900), color-stop(1, #FFA938));
       background-image: -o-linear-gradient(bottom, #FFA41C 0%, #FFD900 59%, #FFA938 100%);
@@ -245,11 +246,35 @@ footer {
     .admin_container .user_table table {
       width: 70vw;
       text-align: center; }
+      .admin_container .user_table table th {
+        background-color: #ffdd1f;
+        font-size: 18px;
+        font-weight: bolder;
+        border-style: none;
+        padding: 5px; }
+      .admin_container .user_table table td {
+        font-weight: lighter;
+        font-size: 15px;
+        padding: 5px;
+        color: black; }
+      .admin_container .user_table table tr:nth-child(odd) {
+        background-color: #f5ee9d; }
   .admin_container .category_table {
     margin-top: 3vh; }
     .admin_container .category_table table {
       width: 50vw;
       text-align: center; }
+      .admin_container .category_table table th {
+        background-color: #ffdd1f;
+        font-size: 18px;
+        font-weight: bolder;
+        padding: 5px; }
+      .admin_container .category_table table td {
+        font-weight: lighter;
+        font-size: 15px;
+        padding: 5px; }
+      .admin_container .category_table table tr:nth-child(odd) {
+        background-color: #f5ee9d; }
 
 .admin_header {
   text-align: center; }
@@ -271,25 +296,7 @@ footer {
   color: #23a68a;
   font-weight: bold; }
 
-.user_table td {
-  /*    border: 1px solid black;*/
-  padding: 5px;
-  color: black; }
-
-.user_table th {
-  background-color: #ffdd1f;
-  font-size: 18px;
-  font-weight: bolder;
-  border-style: none; }
-
-.user_table td {
-  font-weight: lighter;
-  font-size: 15px; }
-
-.user_table tr:nth-child(odd) {
-  background-color: #f5ee9d; }
-
-.edit_user_form {
+.user_form {
   position: relative;
   margin-top: 3vh; }
 
@@ -308,37 +315,93 @@ footer {
   margin-bottom: 5px;
   background-color: #f5f5f5; }
 
-.category_table td, th {
-  /*    border: 1px solid black;*/
-  padding: 5px;
-  color: black; }
-
-.category_table th {
-  background-color: #ffdd1f;
-  font-size: 18px;
-  font-weight: bolder; }
-
-.category_table td {
-  font-weight: lighter;
-  font-size: 15px; }
-
-.category_table tr:nth-child(odd) {
-  background-color: #f5ee9d; }
-
-.edit_category_form {
+.category_form {
   position: relative;
   margin-top: 3vh;
   padding-bottom: 200px; }
 
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Dec 8, 2020, 11:04:46 AM
-    Author     : 837033
-*/
+.item_table {
+  margin-top: 3vh; }
+  .item_table table {
+    width: 50vw; }
+    .item_table table th {
+      background-color: #ffdd1f;
+      font-size: 18px;
+      font-weight: bolder;
+      border-style: none;
+      padding: 5px; }
+    .item_table table td {
+      font-weight: lighter;
+      font-size: 15px;
+      padding: 5px; }
+    .item_table table td:nth-child(3) {
+      text-align: right; }
+    .item_table table td:nth-child(4) {
+      text-align: center; }
+    .item_table table tr:nth-child(odd) {
+      background-color: #f5ee9d; }
+
+.item_form {
+  position: relative;
+  margin-top: 5vh;
+  padding-bottom: 250px; }
+
+.admin_input_div p {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left; }
+
+.admin_input_div input {
+  border: none;
+  border-bottom: solid 1px #ababab;
+  outline: none;
+  width: 280px;
+  padding: 4px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5; }
+
+.inventory_select {
+  width: 100%;
+  padding: 10px;
+  padding-left: 12px;
+  border: 1px solid #ddd;
+  background: url("../images/arrow_down.png") no-repeat right 50%;
+  background-size: 30px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 12px;
+  color: #000;
+  outline: none; }
+
+.inventory_select:hover {
+  border: 1px solid #aaa; }
+
+.btn_style input {
+  border-style: none;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #b0aea2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center; }
+  .btn_style input:hover {
+    background-color: #bdbcb7; }
+
+.in_form {
+  display: flex;
+  justify-content: center; }
+
+.account_table {
+  padding-bottom: 250px; }
+
+strong {
+  color: #fc036f; }
+
 html {
   box-sizing: border-box; }
 

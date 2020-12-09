@@ -44,6 +44,7 @@
 
 .submit_div {
     margin-top: 20px;
+    
     input {
         width: 280px;
         padding: 10px;
@@ -52,6 +53,7 @@
         font-size: 20px;
         background-color: $button_color1;
         color: $default-color;
+        cursor: pointer;
         &:hover {
             background-image: -webkit-gradient(
                 linear,

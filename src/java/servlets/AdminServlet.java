@@ -109,13 +109,20 @@ public class AdminServlet extends HttpServlet {
             } else if (action.equals("category_edit")){
                 
                 if(is.update(categoryId,categoryName)) {
-                    request.setAttribute("message", "Updating the user has been complete!");
+                    request.setAttribute("message", "Updating the category has been complete!");
                 }
             
+            } else if (action.equals("user_add")) {
+                
+               if(as.insert(username, password, email, firstname, lastname)) {
+                    request.setAttribute("message", "Adding the user has been complete!");
+                } else {
+                    request.setAttribute("message", "Please fill in the form!");
+                }  
             } else if (action.equals("category_add")) {
                 
                if(is.insert(categoryName)) {
-                    request.setAttribute("message", "Updating the user has been complete!");
+                    request.setAttribute("message", "Adding the Category has been complete!");
                 } else {
                     request.setAttribute("message", "Please fill in the form!");
                 }  

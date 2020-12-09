@@ -29,15 +29,7 @@ public class InventoryService {
         Items item = itemDB.get(itemID);
         return itemDB.delete(item);
     }
-    
-     public boolean delete(String categoryID) throws Exception {
-        int categoryId = Integer.parseInt(categoryID);
-         Categories category = categoryDB.get(categoryId);
-        return categoryDB.delete(category);
-    }
-    
-    
-
+  
     public boolean insert(int categoryID, String itemName, double price, String owner) throws Exception {
         Items item = new Items();
         UsersDB userDB = new UsersDB();
@@ -69,6 +61,12 @@ public class InventoryService {
         Categories category = new Categories(categoryId, categoryName);
         
         return categoryDB.update(category);
+    }
+    
+    public boolean delete(String categoryID) throws Exception {
+        int categoryId = Integer.parseInt(categoryID);
+        Categories category = categoryDB.get(categoryId);
+        return categoryDB.delete(category);
     }
     
 }

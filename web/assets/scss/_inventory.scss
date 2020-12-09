@@ -1,10 +1,101 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Dec 8, 2020, 11:04:46 AM
-    Author     : 837033
-*/
+
+.item_table {
+    margin-top: 3vh;
+    table {
+       width: 50vw; 
+       
+       th {
+        background-color: $button_color1;
+        font-size: 18px;
+        font-weight: bolder;
+        border-style: none;
+        padding: 5px;
+        }
+    
+        td {
+            font-weight: lighter;
+            font-size: 15px;
+            padding: 5px;
+        }
+        
+        td:nth-child(3) {
+            text-align: right;
+        }
+             
+        td:nth-child(4) {
+            text-align: center;
+        }
+        
+        tr:nth-child(odd) {
+            background-color: $table_color;
+        }
+    }
+} 
+
+.item_form {
+    position: relative;
+    margin-top: 5vh;
+    padding-bottom: 250px;
+}
+
+.admin_input_div p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: left;
+      
+}
+
+.admin_input_div input {
+    border: none;
+    border-bottom: solid 1px $basic_color;
+    outline: none;
+    width: 280px;
+    padding: 4px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    background-color: $background_color;
+    
+}
+
+.inventory_select {
+    width: 100%; 
+    padding: 10px; 
+    padding-left: 12px;
+    border: 1px solid #ddd;
+    background: url('../images/arrow_down.png') no-repeat right 50%;
+    background-size: 30px; 
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 12px;
+    color: #000;
+    outline:none;
+}
+
+.inventory_select:hover {
+    border: 1px solid #aaa;
+}
+
+.btn_style {
+    input {
+        border-style: none;
+        width: 100%;
+        border-radius: 5px;
+        background-color: #b0aea2;
+        color: $default-color;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        &:hover {
+            background-color: #bdbcb7;
+        }
+    }
+}
+.in_form {
+    display: flex;
+    justify-content: center;
+}
+
 

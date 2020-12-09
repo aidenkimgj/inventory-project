@@ -68,7 +68,7 @@
                         <p> Password </p>
                         <input type="password" name="password" placeholder="Enter Password"/>    
                     </div>
-                   
+                    <input type="hidden" name="action" value="user_add">
                     <div class="submit_div">
                         <input type="submit" value="Create account">
                     </div>

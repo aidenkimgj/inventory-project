@@ -87,15 +87,19 @@
                             
                             <td>${user.role.getRolename()}</td>
                             <td>
-                                <form action="admin" method="post" >
-                                    <input type="submit" value="Delete">
+                                <form class="in_form" action="admin" method="post" >
+                                    <div class="btn_style">
+                                         <input type="submit" value="Delete">
+                                    </div>
                                     <input type="hidden" name="action" value="u_delete">
                                     <input type="hidden" name="selectedUsername" value="${user.username}">
                                 </form>
                             </td>
                             <td>
-                                <form action="admin" method="get">
-                                    <input type="submit" value="Edit">
+                                <form class="in_form" action="admin" method="get">
+                                    <div class="btn_style">
+                                        <input type="submit" value="Edit">
+                                    </div>
                                     <input type="hidden" name="action" value="u_view">
                                     <input type="hidden" name="selectedUsername" value="${user.username}">
                                 </form>
@@ -105,9 +109,39 @@
                 </table>
             </div>
                         
-            <div class="edit_user_form">
+            <div class="user_form">
+                <c:if test="${selectedUser == null}">
+                    <form action="admin" method="POST">
+                        <h3>Add User</h3>
+                        <div class="admin_input_div">
+                            <p> Username </p>
+                            <input type="text" name="username">
+                        </div>
+                        <div class="admin_input_div">
+                            <p> Password </p>
+                            <input type="password" name="password">
+                        </div>
+                        <div class="admin_input_div">
+                            <p> Email </p>
+                            <input type="email" name="email">
+                        </div>
+                        <div class="admin_input_div">
+                            <p> First name </p>
+                            <input type="text" name="firstname">
+                        </div>
+                        
+                        <div class="admin_input_div">
+                            <p> Last name </p>
+                            <input type="text" name="lastname">
+                        </div>
+                        <input type="hidden" name="action" value="user_add">
+                        <div class="submit_div">
+                             <input type="submit" value="Submit">
+                        </div>
+                    </form>
+                </c:if>
+                
                 <c:if test="${selectedUser != null}">
-                    
                     <form action="admin" method="POST">
                         <h3>Edit User</h3>
                         <div class="admin_input_div">
@@ -119,8 +153,7 @@
                             <p> Password </p>
                             <input type="password" name="password" value="${selectedUser.password}">
                         </div>
-                        
-                        
+                                                
                         <div class="admin_input_div">
                             <p> Email </p>
                             <input type="email" name="email" value="${selectedUser.email}">
@@ -192,15 +225,21 @@
                             <td>${category.categoryID}</td>
                             <td>${category.itemsList.size()}</td>
                             <td>
-                                <form action="admin" method="post" >
-                                    <input type="submit" value="Delete">
+                                <form class="in_form" action="admin" method="post" >
+                                    <div class="btn_style">
+                                        <input type="submit" value="Delete">
+                                    </div>
+                                    
                                     <input type="hidden" name="action" value="c_delete">
                                     <input type="hidden" name="selectedCategory" value="${category.categoryID}">
                                 </form>
                             </td>
                             <td>
-                                <form action="admin" method="get">
-                                    <input type="submit" value="Edit">
+                                <form class="in_form" action="admin" method="get">
+                                    <div class="btn_style">
+                                        <input type="submit" value="Edit">
+                                    </div>
+                                    
                                     <input type="hidden" name="action" value="c_view">
                                     <input type="hidden" name="selectedCategory" value="${category.categoryID}">
                                 </form>
@@ -210,7 +249,7 @@
                 </table>
             </div>
             
-            <div class="edit_category_form">
+            <div class="category_form">
                 <c:if test="${selectedCategory == null}">
                     
                     <form action="admin" method="POST">
