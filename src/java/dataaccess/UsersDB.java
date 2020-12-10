@@ -1,5 +1,6 @@
 package dataaccess;
 
+import util.DBUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -76,7 +77,9 @@ public class UsersDB {
         trans = em.getTransaction();
 
         try {
+           
            trans.begin();
+
            em.remove(em.merge(user));
            trans.commit();
            return true;

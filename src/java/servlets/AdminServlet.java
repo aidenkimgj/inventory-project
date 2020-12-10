@@ -76,56 +76,52 @@ public class AdminServlet extends HttpServlet {
         InventoryService is = new InventoryService();
         
         try {
-            if (action.equals("u_delete")) {
-                String selectedUsername = request.getParameter("selectedUsername");
-                if(as.delete(selectedUsername)) {
-                    request.setAttribute("message", "Deleting the user has been complete!");
-                } else {
-                    request.setAttribute("message", "The administrator cannot be removed!");
-                }
-            } else if (action.equals("c_delete")) {
-                String selectedCategory = request.getParameter("selectedCategory");
-                if(is.delete(selectedCategory)) {
-                    request.setAttribute("message", "Deleting the category has been complete!");
-                } else {
-                    request.setAttribute("message", "The administrator cannot be removed!");
-                } 
-            }else if (action.equals("user_edit")) {
-                if(activeCheck == null) {
-                    active = false;
-                } else if(activeCheck.equals("on")) {
+            switch (action) {
+                case "u_delete":
+                    String selectedUsername = request.getParameter("selectedUsername");
+                    if (as.delete(selectedUsername)) {
+                        request.setAttribute("message", "Deleting the user has been complete!");
+                    } else {
+                        request.setAttribute("message", "The administrator cannot be removed!");
+                    }   break;
+                case "c_delete":
+                    String selectedCategory = request.getParameter("selectedCategory");
+                    if (is.delete(selectedCategory)) {
+                        request.setAttribute("message", "Deleting the category has been complete!");
+                    } else {
+                        request.setAttribute("message", "The administrator cannot be removed!");
+                    }   break;
+                case "user_edit":
+                    if (activeCheck == null) {
+                        active = false;
+                    } else if (activeCheck.equals("on")) {
+                        active = true;
+                    }   if (adminCheck == null) {
+                        admin = 2;
+                    } else if (adminCheck.equals("on")) {
+                        admin = 1;
+                    }   if (as.update(username, password, email, firstname, lastname, active, admin)) {
+                        request.setAttribute("message", "Updating the user has been complete!");
+                    }   break;
+                case "category_edit":
+                    if (is.update(categoryId,categoryName)) {
+                        request.setAttribute("message", "Updating the category has been complete!");
+                    }   break;
+                case "user_add":
                     active = true;
-                }
-         
-                if(adminCheck == null) {
-                    admin = 2;
-                } else if(adminCheck.equals("on")) {
-                    admin = 1;
-                }
-                     
-                if(as.update(username, password, email, firstname, lastname, active, admin)) {
-                    request.setAttribute("message", "Updating the user has been complete!");
-                }
-            } else if (action.equals("category_edit")){
-                
-                if(is.update(categoryId,categoryName)) {
-                    request.setAttribute("message", "Updating the category has been complete!");
-                }
-            
-            } else if (action.equals("user_add")) {
-                
-               if(as.insert(username, password, email, firstname, lastname)) {
-                    request.setAttribute("message", "Adding the user has been complete!");
-                } else {
-                    request.setAttribute("message", "Please fill in the form!");
-                }  
-            } else if (action.equals("category_add")) {
-                
-               if(is.insert(categoryName)) {
-                    request.setAttribute("message", "Adding the Category has been complete!");
-                } else {
-                    request.setAttribute("message", "Please fill in the form!");
-                }  
+                    if (as.insert(username, password, email, firstname, lastname, active)) {
+                        request.setAttribute("message", "Adding the user has been complete!");
+                    } else {
+                        request.setAttribute("message", "Please fill in the form!");
+                    }   break;
+                case "category_add":
+                    if (is.insert(categoryName)) {
+                        request.setAttribute("message", "Adding the Category has been complete!");
+                    } else {
+                        request.setAttribute("message", "Please fill in the form!");
+                    }   break;
+                default:
+                    break;  
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Whoops.  Could not perform that action.");

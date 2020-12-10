@@ -36,13 +36,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `homeinventorydb`.`users` (
   `Username` VARCHAR(10) NOT NULL,
-  `Password` VARCHAR(20) NOT NULL,
+  `Password` VARCHAR(200) NOT NULL,
   `Email` VARCHAR(50) NOT NULL,
   `FirstName` VARCHAR(50) NOT NULL,
   `LastName` VARCHAR(50) NOT NULL,
   `Active` BIT NOT NULL,
   `Role` INT(11) NOT NULL,
   `ResetpasswordUUID` VARCHAR(50),
+  `UserSalt` VARCHAR(44) NOT NULL,  
   PRIMARY KEY (`Username`),
   CONSTRAINT `fk_user_role`
     FOREIGN KEY (`role`)
@@ -103,10 +104,10 @@ INSERT INTO `categories` (`CategoryName`) VALUES ('other');
 INSERT INTO `role` VALUES (1, 'system admin');
 INSERT INTO `role` VALUES (2, 'regular user');
 
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('admin','password','cprg352+admin@gmail.com','Admin','Admin',1,1);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('admin2','password','cprg352+admin2@gmail.com','Admin2','Admin2',0,1);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('anne','password','cprg352+anne@gmail.com','Anne','Annerson',1,2);
-INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`) VALUES ('barb','password','cprg352+barb@gmail.com','Barb','Barber',0,2);
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`,`UserSalt`) VALUES ('admin','3d1545789e208fd71ac3605cf3e3c89a28633e213d2d5503107bc344f1bae13a','cprg352+admin@gmail.com','Admin','Admin',1,1,'GxwISOPec6uONJyEwzscpEVJsScgDGdg7j4tL7uCaL0=');
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`,`UserSalt`) VALUES ('admin2','efb7fbbb5b5fb2d900f7c97b059e953f94f3f5a074cf9309105ff0c5f791869b','cprg352+admin2@gmail.com','Admin2','Admin2',0,1,'8wCRWze5w4HZNeMM/QN0mir5uL0pV1HuwoG25bGFA5c=');
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`,`UserSalt`) VALUES ('anne','db7824dedac5e8f7e519160a9f1eeeb83c093879de10d11809fbe4ad8094c55d','cprg352+anne@gmail.com','Anne','Annerson',1,2,'slCVBytiBpa6N27sUh5/e4udX+18oJPzEF9sisH9xQo=');
+INSERT INTO `users` (`Username`,`Password`,`Email`,`FirstName`,`LastName`,`Active`,`Role`,`UserSalt`) VALUES ('barb','42442248202e4f0290b03ec903266c926cfc2b48de9c359ee0bca9b01fe0fd04','cprg352+barb@gmail.com','Barb','Barber',0,2,'rbAVtmiKHtMisOe2pjyVDv8KOVb/k0p940oaDVfR1L8=');
 
 INSERT INTO `items` (`Category`,`ItemName`,`Price`,`Owner`) VALUES (1,'blender',29.99,'anne');
 INSERT INTO `items` (`Category`,`ItemName`,`Price`,`Owner`) VALUES (1,'toaster',19.99,'anne');

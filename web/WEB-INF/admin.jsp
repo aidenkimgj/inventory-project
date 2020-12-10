@@ -45,7 +45,7 @@
             <div class="admin_header">
                 <div class="admin_title">
                      
-                    <h2>Admin menu for ${username}</h2>
+                    <h2>Admin menu for <strong>${_user.firstName} ${_user.lastName}</strong></h2>
                 </div>
                 <a name="ManageUsers"></a>
                 <ul class="admin_menu">

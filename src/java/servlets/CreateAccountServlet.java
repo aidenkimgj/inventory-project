@@ -30,13 +30,13 @@ public class CreateAccountServlet extends HttpServlet {
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
-        
+        boolean active = false;
         AccountService as = new AccountService();
         
         try {
             if (action.equals("user_add")) {
                 
-               if(as.insert(username, password, email, firstname, lastname)) {
+               if (as.insert(username, password, email, firstname, lastname, active)) {
                     request.setAttribute("message", "Adding the user has been complete!");
                 } else {
                     request.setAttribute("message", "Please fill in the form!");

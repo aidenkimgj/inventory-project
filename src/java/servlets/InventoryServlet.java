@@ -26,8 +26,7 @@ public class InventoryServlet extends HttpServlet {
         InventoryService is = new InventoryService();
         try {
                 Users user = as.get(username);
-                session.setAttribute("firstname", user.getFirstName());
-                session.setAttribute("lastname", user.getLastName());
+                session.setAttribute("user", user);
                
         } catch (Exception ex) {
                 Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);

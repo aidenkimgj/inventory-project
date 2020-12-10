@@ -44,7 +44,7 @@
         
         <div class="admin_container">
             <div class="admin_title">
-                <h2>Inventory for ${firstname} ${lastname}</h2>
+                <h2>Inventory for <strong>${user.firstName} ${user.lastName}</strong></h2>
             </div>
             
             <div class="item_table">

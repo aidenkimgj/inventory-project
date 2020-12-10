@@ -1,5 +1,6 @@
 package dataaccess;
 
+import util.DBUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")
-    , @NamedQuery(name = "Users.findByResetpasswordUUID", query = "SELECT u FROM Users u WHERE u.resetpasswordUUID = :resetpasswordUUID")})
+    , @NamedQuery(name = "Users.findByResetpasswordUUID", query = "SELECT u FROM Users u WHERE u.resetpasswordUUID = :resetpasswordUUID")
+    , @NamedQuery(name = "Users.findByUserSalt", query = "SELECT u FROM Users u WHERE u.userSalt = :userSalt")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,6 +63,9 @@ public class Users implements Serializable {
     private boolean active;
     @Column(name = "ResetpasswordUUID")
     private String resetpasswordUUID;
+    @Basic(optional = false)
+    @Column(name = "UserSalt")
+    private String userSalt;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Items> itemsList;
     @JoinColumn(name = "Role", referencedColumnName = "Role_id")
@@ -75,13 +79,14 @@ public class Users implements Serializable {
         this.username = username;
     }
 
-    public Users(String username, String password, String email, String firstName, String lastName, boolean active) {
+    public Users(String username, String password, String email, String firstName, String lastName, boolean active, String userSalt) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.active = active;
+        this.userSalt = userSalt;
     }
 
     public String getUsername() {
@@ -138,6 +143,14 @@ public class Users implements Serializable {
 
     public void setResetpasswordUUID(String resetpasswordUUID) {
         this.resetpasswordUUID = resetpasswordUUID;
+    }
+
+    public String getUserSalt() {
+        return userSalt;
+    }
+
+    public void setUserSalt(String userSalt) {
+        this.userSalt = userSalt;
     }
 
     @XmlTransient

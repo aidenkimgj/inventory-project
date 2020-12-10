@@ -12,10 +12,6 @@ import javax.servlet.http.HttpSession;
 import models.Users;
 import services.AccountService;
 
-/**
- *
- * @author 837033
- */
 public class AccountServlet extends HttpServlet {
 
 
@@ -26,11 +22,11 @@ public class AccountServlet extends HttpServlet {
         String username = (String) session.getAttribute("username");
         AccountService as = new AccountService();
         try {
-                Users user = as.get(username);
-                session.setAttribute("userAccount", user);
+            Users user = as.get(username);
+            session.setAttribute("userAccount", user);
                                
         } catch (Exception ex) {
-                Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
@@ -54,13 +50,13 @@ public class AccountServlet extends HttpServlet {
         
         try {
             if (action.equals("edit")) {
-                if(activeCheck == null) {
+                if (activeCheck == null) {
                     active = false;
-                } else if(activeCheck.equals("on")) {
+                } else if (activeCheck.equals("on")) {
                     active = true;
                 }
                 
-                if(as.update(username, password, email, firstname, lastname, active, admin)) {
+                if (as.update(username, password, email, firstname, lastname, active, admin)) {
                     request.setAttribute("message", "Updating the user has been complete!");
                 }
             }
@@ -69,11 +65,11 @@ public class AccountServlet extends HttpServlet {
         } 
                 
         try {
-                Users user = as.get(username);
-                session.setAttribute("userAccount", user);
+            Users user = as.get(username);
+            session.setAttribute("userAccount", user);
                                
         } catch (Exception ex) {
-                Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);

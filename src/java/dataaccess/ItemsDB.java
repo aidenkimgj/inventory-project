@@ -1,13 +1,17 @@
 package dataaccess;
 
+import util.DBUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import models.Categories;
 import models.Items;
 import models.Users;
 
 public class ItemsDB {
+       
     private EntityManager em;
     private EntityTransaction trans;
     
@@ -29,8 +33,11 @@ public class ItemsDB {
         em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
         try {
+            Categories category = item.getCategory();
+            category.getItemsList().add(item);
             trans.begin();
             em.persist(item);
+            em.merge(category);
             trans.commit();
             return true;
         } catch (Exception ex) {
@@ -72,5 +79,24 @@ public class ItemsDB {
             em.close();
         }
         
+    }
+    
+     public int deleteAll(Users deletedUser) throws Exception {
+        em = DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+        String qString = "DELETE FROM Items i WHERE i.owner = :owner"; 
+        Query q = em.createQuery(qString).setParameter("owner", deletedUser);
+        int count = 0;
+        try {
+            trans.begin();
+            count = q.executeUpdate();
+            trans.commit();
+            return count;
+        } catch (Exception ex) {
+            trans.rollback();
+            return count;
+        } finally {
+            em.close();
+        }
     }
 }
