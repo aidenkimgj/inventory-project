@@ -91,4 +91,25 @@ public class UsersDB {
             
         }
     }
+
+    public Users getByEmail(String email) {
+        em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            Users user = em.createNamedQuery("Users.findByEmail", Users.class).setParameter("email", email).getSingleResult();
+            return user;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Users getByUUID(String uuid) {
+        em = DBUtil.getEmFactory().createEntityManager();
+   
+        try {
+            Users user = em.createNamedQuery("Users.findByUserUUID", Users.class).setParameter("userUUID", uuid).getSingleResult();
+            return user;
+        } finally {
+            em.close();
+        }
+    }
 }

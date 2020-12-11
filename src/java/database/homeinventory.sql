@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `homeinventorydb`.`users` (
   `LastName` VARCHAR(50) NOT NULL,
   `Active` BIT NOT NULL,
   `Role` INT(11) NOT NULL,
-  `ResetpasswordUUID` VARCHAR(50),
+  `UserUUID` VARCHAR(50),
   `UserSalt` VARCHAR(44) NOT NULL,  
   PRIMARY KEY (`Username`),
   CONSTRAINT `fk_user_role`

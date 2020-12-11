@@ -8,16 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import services.AccountService;
 
-/**
- *
- * @author 837033
- */
 public class CreateAccountServlet extends HttpServlet {
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String uuid = request.getParameter("uuid");
+        
+        if (uuid != null) {
+            request.setAttribute("uuid", uuid);
+            getServletContext().getRequestDispatcher("/WEB-INF/activation.jsp").forward(request, response);
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
     }
        
@@ -30,6 +32,9 @@ public class CreateAccountServlet extends HttpServlet {
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
+        String url = request.getRequestURL().toString();
+        String path = getServletContext().getRealPath("/WEB-INF");
+        
         boolean active = false;
         AccountService as = new AccountService();
         
@@ -37,6 +42,7 @@ public class CreateAccountServlet extends HttpServlet {
             if (action.equals("user_add")) {
                 
                if (as.insert(username, password, email, firstname, lastname, active)) {
+                    as.activationEmail(email, path, url);
                     request.setAttribute("message", "Adding the user has been complete!");
                 } else {
                     request.setAttribute("message", "Please fill in the form!");

@@ -4,8 +4,12 @@ import dataaccess.ItemsDB;
 import dataaccess.RoleDB;
 import dataaccess.UsersDB;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import models.Users;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Items;
 import models.Role;
 import util.PasswordUtil;
@@ -79,12 +83,13 @@ public class AccountService {
             System.out.println("Password is valid.");
         } catch (Exception ex ) {
             System.out.println(ex.getMessage());
+            return false;
         }
         
-        String salt = userDB.getUser(username).getUserSalt();
         Users user = userDB.getUser(username);
-
-        if(password.equals(user.getPassword())) {
+        String salt = user.getUserSalt();
+        
+        if (password.equals(user.getPassword())) {
             user.setPassword(password);
             user.setUserSalt(salt);
         } else {
@@ -121,5 +126,104 @@ public class AccountService {
             }
         }
         return false;
+    }
+
+    public boolean changePassword(String uuid, String newPassword)  {
+        try {
+            PasswordUtil.checkPasswordStrength(newPassword);
+            System.out.println("Password is valid.");
+        } catch (Exception ex) {
+            return false;
+        }
+        
+        try {
+            Users user = userDB.getByUUID(uuid);
+            System.out.println(user.getFirstName());
+            String salt = user.getUserSalt();
+            String passCheck = PasswordUtil.hashPassword(user.getUsername() + newPassword + salt);
+            System.out.println(passCheck);
+            if (passCheck.equals(user.getPassword())) {
+                System.out.println("Do not enter previous password!");
+                return false;
+            }
+            
+            String newSalt = PasswordUtil.getSalt();
+            String newPass = PasswordUtil.hashPassword(user.getUsername() + newPassword + newSalt);
+            
+            user.setPassword(newPass);
+            user.setUserSalt(newSalt);
+            user.setUserUUID(null);
+            
+            return userDB.update(user);
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public void resetPassword(String email, String path, String url) {
+        
+        try {
+            String uuid = UUID.randomUUID().toString();
+            Users user = userDB.getByEmail(email);
+            
+            user.setUserUUID(uuid);
+            userDB.update(user);
+
+            String to = user.getEmail();
+            String subject = "Iventory App Password Reset";
+            String template = path + "/emailtemplates/resetpassword.html";
+            String link = url + "?uuid=" + uuid;
+
+            HashMap<String, String> tags = new HashMap<>();
+            tags.put("firstname", user.getFirstName());
+            tags.put("lastname", user.getLastName());
+            tags.put("username", user.getUsername());
+            tags.put("link", link);
+                
+        
+            GmailService.sendMail(to, subject, template, tags);
+        } catch (Exception ex) {
+            Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean activateAccount(String uuid) {
+        try {
+            Users user = userDB.getByUUID(uuid);
+            user.setActive(true);
+            user.setUserUUID(null);
+            return userDB.update(user);
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public void activationEmail(String email, String path, String url) {
+       try {
+            String uuid = UUID.randomUUID().toString();
+            Users user = userDB.getByEmail(email);
+            
+            user.setUserUUID(uuid);
+            userDB.update(user);
+
+            String to = user.getEmail();
+            String subject = "Iventory App Account Activate";
+            String template = path + "/emailtemplates/activation.html";
+            String link = url + "?uuid=" + uuid;
+
+            HashMap<String, String> tags = new HashMap<>();
+            tags.put("firstname", user.getFirstName());
+            tags.put("lastname", user.getLastName());
+            tags.put("link", link);
+                
+        
+            GmailService.sendMail(to, subject, template, tags);
+        } catch (Exception ex) {
+            Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void welcomeEmail(String email, String path, String url) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

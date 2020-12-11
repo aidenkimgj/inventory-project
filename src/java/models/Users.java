@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")
-    , @NamedQuery(name = "Users.findByResetpasswordUUID", query = "SELECT u FROM Users u WHERE u.resetpasswordUUID = :resetpasswordUUID")
+    , @NamedQuery(name = "Users.findByUserUUID", query = "SELECT u FROM Users u WHERE u.userUUID = :userUUID")
     , @NamedQuery(name = "Users.findByUserSalt", query = "SELECT u FROM Users u WHERE u.userSalt = :userSalt")})
 public class Users implements Serializable {
 
@@ -61,8 +61,8 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "Active")
     private boolean active;
-    @Column(name = "ResetpasswordUUID")
-    private String resetpasswordUUID;
+    @Column(name = "UserUUID")
+    private String userUUID;
     @Basic(optional = false)
     @Column(name = "UserSalt")
     private String userSalt;
@@ -137,12 +137,12 @@ public class Users implements Serializable {
         this.active = active;
     }
 
-    public String getResetpasswordUUID() {
-        return resetpasswordUUID;
+    public String getUserUUID() {
+        return userUUID;
     }
 
-    public void setResetpasswordUUID(String resetpasswordUUID) {
-        this.resetpasswordUUID = resetpasswordUUID;
+    public void setUserUUID(String userUUID) {
+        this.userUUID = userUUID;
     }
 
     public String getUserSalt() {

@@ -99,13 +99,13 @@
   opacity: 0.5; }
 
 footer {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #333333;
   padding: 45px 10px;
   color: white;
-  position: absolute;
   bottom: 0;
   width: 100%; }
 
@@ -319,7 +319,7 @@ footer {
 .category_form {
   position: relative;
   margin-top: 3vh;
-  padding-bottom: 200px; }
+  padding-bottom: 300px; }
 
 .item_table {
   margin-top: 3vh; }
@@ -398,7 +398,7 @@ footer {
   justify-content: center; }
 
 .account_table {
-  padding-bottom: 250px; }
+  padding-bottom: 300px; }
 
 strong {
   color: #fc036f; }

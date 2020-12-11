@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +10,7 @@
         
     </head>
     <body>
-         <header>
+        <header>
             <nav class="navbar">
                 <div class="navbar_logo">
                     <i class="fas fa-laptop-house"></i>
@@ -37,49 +36,25 @@
                 </a>
             </nav>
         </header>
-        <div class="login_container">
-            <c:if test="${uuid != null}">
-                <form action="active" method="post">
-                    <div class="login_intro">
-                        <i class="fas fa-laptop-house"></i>
-                        <h2>Activate Account</h2>
-                    </div>
-
-                    <div class="reset_mention">
-                        <p>Please click button to activate your account.</p>
-                    </div>
-                    
-                    <div class="submit_div">
-                        <input type="hidden" name="uuid" value="${uuid}">    
-                        <input type="submit" value="Verify">
-                    </div>
-                </form>
-            </c:if>
-            <c:if test="${uuid == null}">
-                <form action="active" method="post">
-                    <div class="login_intro">
-                        <i class="fas fa-laptop-house"></i>
-                        <h2>Activate Account</h2>
-                    </div>
-
-                    <div class="reset_mention">
-                        <p>Please enter your email address which is registered in our service to reset your password.</p>
-                    </div>
-
-                    <div class="reset_input_div">
-                        <p> Email </p>
-                        <input type="text" name="email" placeholder="Enter your email"/>
-                    </div>
-
-                    <div class="submit_div">
-                        <input type="submit" value="Submit">
-                    </div>
-                </form>
-            </c:if>
-            
+        <div class="login_container"> 
+            <form action="reset" method="post">
+                <div class="login_intro">
+                    <i class="fas fa-laptop-house"></i>
+                    <h2>Enter a new Password</h2>
+                </div>
+                
+                <div class="login_input_div">
+                    <p> New Password </p>
+                    <input type="password" name="newpassword" placeholder="Please enter new password"/>
+                </div>
+                <input type="hidden" name="uuid" value="${uuid}">
+                <div class="submit_div">
+                    <input type="submit" value="Submit">
+                </div>
+             </form>
         </div>
                        
-        <footer> 
+        <footer class="login_footer">
             <h3>Copyright © Aiden's Inventory Service</h3>
         </footer>
     </body>

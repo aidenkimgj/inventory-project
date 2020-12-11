@@ -108,7 +108,6 @@
                 </form>
             </div>
 
-
             <footer class="login_footer">
                 <h3>Copyright © Aiden's Inventory Service</h3>
             </footer> 
