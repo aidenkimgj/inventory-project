@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
         <link href="assets/css/base.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/80ee7ec6c8.js" crossorigin="anonymous"></script>
+        <script src="assets/scripts/header.js" defer></script>
         
     </head>
     <body>
@@ -63,7 +64,7 @@
                         <th>Username</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Email</th>
+<!--                        <th>Email</th>-->
                         <th>Active</th>
                         <th>Role</th>
                         <th>Delete</th>
@@ -74,7 +75,7 @@
                             <td>${user.username}</td>
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
-                            <td>${user.email}</td>
+<!--                            <td>${user.email}</td>-->
                             <c:choose>
                                 <c:when test="${user.active == true}">
                                     <td>on</td>

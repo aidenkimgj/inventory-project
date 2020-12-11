@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
         <link href="assets/css/base.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/80ee7ec6c8.js" crossorigin="anonymous"></script>
-        
+        <script src="assets/scripts/header.js" defer></script>        
     </head>
     <body>
          <header>
@@ -42,7 +42,7 @@
         </header>
         <div class="admin_container">
             <div class="admin_title">
-                <h2>Account information for <strong>${userAccount.firstName} ${userAccount.lastName}</strong></h2>
+                <h2>Account for <strong>${userAccount.firstName} ${userAccount.lastName}</strong></h2>
             </div>
             
             <div class="account_table">

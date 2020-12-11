@@ -14,11 +14,10 @@
   margin-left: 3%;  
   font-size: 30px;
   color: $default-color;
+  &:hover {
+      color: $button_color1;
+  }
 }
-
-/*.navbar_logo i {
-  color: rgb(124, 135, 182);
-}*/
 
 .navbar_menu {
   margin-right: 7%;
@@ -63,5 +62,45 @@
   position: absolute;
   right: 32px;
   font-size: 24px;
-  color: rgb(124, 135, 182);
+  &:hover{
+      color: $button_color1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 24px;
+  }
+
+  .navbar_menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar_menu li {
+    width: 100%;
+    text-align: center;  
+  }
+
+  .navbar_icons {
+    display:none;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .navbar_toogleBtn {
+    display: block;
+    padding-top: 5px;
+  }
+
+  .navbar_menu.active,
+  .navbar_icons.active {
+    display: flex;
+  }
+
 }

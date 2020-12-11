@@ -13,10 +13,9 @@
   margin-left: 3%;
   font-size: 30px;
   color: white; }
+  .navbar_logo:hover {
+    color: #ffdd1f; }
 
-/*.navbar_logo i {
-  color: rgb(124, 135, 182);
-}*/
 .navbar_menu {
   margin-right: 7%;
   display: flex;
@@ -51,9 +50,39 @@
   display: none;
   position: absolute;
   right: 32px;
-  font-size: 24px;
-  color: #7c87b6; }
+  font-size: 24px; }
+  .navbar_toogleBtn:hover {
+    color: #ffdd1f; }
 
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 24px; }
+
+  .navbar_menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; }
+
+  .navbar_menu li {
+    width: 100%;
+    text-align: center; }
+
+  .navbar_icons {
+    display: none;
+    justify-content: center;
+    width: 100%;
+    padding: 0; }
+
+  .navbar_toogleBtn {
+    display: block;
+    padding-top: 5px; }
+
+  .navbar_menu.active,
+  .navbar_icons.active {
+    display: flex; } }
 .home_container {
   top: 97px;
   bottom: 150.433px;
@@ -98,6 +127,20 @@
   z-index: -1;
   opacity: 0.5; }
 
+@media screen and (max-width: 768px) {
+  .home_container {
+    top: 54px; }
+    .home_container a {
+      height: 5vh;
+      width: 30vw;
+      padding: 6px;
+      margin-left: 35%; } }
+@media screen and (max-width: 510px) {
+  .home_container h1 {
+    font-size: 40px; }
+  .home_container a {
+    padding: 9px;
+    font-size: 16px; } }
 footer {
   position: absolute;
   display: flex;
@@ -176,6 +219,9 @@ footer {
       padding-left: 5px;
       color: #10abe8; }
 
+@media screen and (max-width: 768px) {
+  .login_container {
+    top: 54px; } }
 .create_container {
   display: flex;
   position: relative;
@@ -244,7 +290,7 @@ footer {
   .admin_container .user_table {
     margin-top: 3vh; }
     .admin_container .user_table table {
-      width: 70vw;
+      width: 50vw;
       text-align: center; }
       .admin_container .user_table table th {
         background-color: #ffdd1f;
@@ -319,7 +365,7 @@ footer {
 .category_form {
   position: relative;
   margin-top: 3vh;
-  padding-bottom: 300px; }
+  padding-bottom: 230px; }
 
 .item_table {
   margin-top: 3vh; }
