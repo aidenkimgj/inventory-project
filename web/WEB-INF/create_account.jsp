@@ -41,7 +41,7 @@
         <div class="create_container">
             <c:if test="${unaddUser != null}">
                 <script>
-                    alert('Please fill in the form exactly!');
+                    alert('Please fill in the form exactly! or Username already exsist!');
                     document.location.href="create";
                 </script>
             </c:if>
