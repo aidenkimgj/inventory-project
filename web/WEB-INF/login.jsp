@@ -60,7 +60,7 @@
                     document.location.href="login";
                 </script>
             </c:if>
-            <c:if test="${actived != null}">
+            <c:if test="${activated != null}">
                 <script>
                     alert('Your account has been activated!');
                     document.location.href="login";
