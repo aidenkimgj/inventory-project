@@ -55,6 +55,7 @@
                         <th>Name</th>
                         <th>Price</th>
                         <th>Delete</th>
+                        <th>Edit</th>
                     </tr>
                     <c:forEach var="item" items="${items}">
                         <tr>
@@ -70,6 +71,15 @@
                                     <input type="hidden" name="selectedItem" value="${item.itemID}">
                                 </form>
                             </td>
+                            <td id="in_btn">
+                                <form class="in_form" action="inventory" method="get" >
+                                    <div class="btn_style">
+                                        <input type="submit" value="Edit">
+                                    </div>
+                                    <input type="hidden" name="action" value="view">
+                                    <input type="hidden" name="selectedItem" value="${item.itemID}">
+                                </form>
+                            </td>
 
                         </tr>
                     </c:forEach>
@@ -77,35 +87,73 @@
             </div>
          
             <div class="item_form">
-                <h3>Add Item</h3>
-                <form action="inventory" method="POST">
-                    
-                    <div class="admin_input_div">
-                        <p> Category </p>
-                        <select class="inventory_select" name="category">
-                            <c:forEach var="category" items="${categories}">
-                                <option value="${category.categoryID}">${category.categoryName}</option>
-                            </c:forEach>
+                <c:if test="${selectedItem == null}">
+                    <h3>Add Item</h3>
+                    <form action="inventory" method="POST">
 
-                        </select>
-                    </div>
-                    
-                    <div class="admin_input_div">
-                        <p> Name </p>
-                        <input type="text" name="name">
-                    </div>
-                    
-                    <div class="admin_input_div">
-                        <p> Price </p>
-                        <input type="text" name="price">
-                    </div>
-                            
-                    
-                    <input type="hidden" name="action" value="add">
-                    <div class="submit_div">
-                         <input type="submit" value="Save">
-                    </div>
-                </form>
+                        <div class="admin_input_div">
+                            <p> Category </p>
+                            <select class="inventory_select" name="category">
+                                <c:forEach var="category" items="${categories}">
+                                    <option value="${category.categoryID}">${category.categoryName}</option>
+                                </c:forEach>
+
+                            </select>
+                        </div>
+
+                        <div class="admin_input_div">
+                            <p> Name </p>
+                            <input type="text" name="name">
+                        </div>
+
+                        <div class="admin_input_div">
+                            <p> Price </p>
+                            <input type="text" name="price">
+                        </div>
+
+                        <input type="hidden" name="action" value="add">
+                        <div class="submit_div">
+                             <input type="submit" value="Save">
+                        </div>
+                    </form>                     
+                </c:if>
+                <c:if test="${selectedItem != null}">
+                    <h3>Edit Item</h3>
+                    <form action="inventory" method="POST">
+
+                        <div class="admin_input_div">
+                            <p> Category </p>
+                            <select class="inventory_select" name="category">
+                                <c:forEach var="category" items="${categories}">
+                                    <c:choose>
+                                        <c:when test="${selectedItem.category.categoryName == category.categoryName}">
+                                            <option value="${category.categoryID}" selected>${category.categoryName}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category.categoryID}">${category.categoryName}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="admin_input_div">
+                            <p> Name </p>
+                            <input type="text" name="name" value="${selectedItem.itemName}">
+                        </div>
+
+                        <div class="admin_input_div">
+                            <p> Price </p>
+                            <input type="text" name="price" value="<fmt:formatNumber type='number' groupingUsed = 'false' minFractionDigits='2' value='${selectedItem.price}'/>">
+                        </div>
+                        <input type="hidden" name="selectedItem" value="${selectedItem.itemID}">
+                        <input type="hidden" name="action" value="edit">
+                        <div class="submit_div">
+                             <input type="submit" value="Save">
+                        </div>
+                    </form>                     
+                </c:if>
+                
             </div>
 
             <footer class="login_footer">

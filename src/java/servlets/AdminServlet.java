@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Categories;
 import models.Users;
 import services.AccountService;
+import services.CategoryService;
 import services.InventoryService;
 
 public class AdminServlet extends HttpServlet {
@@ -18,7 +19,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InventoryService is = new InventoryService();
+        CategoryService cs = new CategoryService();
         AccountService as = new AccountService();
         String action = request.getParameter("action");
         
@@ -35,7 +36,7 @@ public class AdminServlet extends HttpServlet {
             
             System.out.println(selectedCategory);
             try {
-                Categories category = is.get(selectedCategory);
+                Categories category = cs.get(selectedCategory);
                 request.setAttribute("selectedCategory", category);
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +47,7 @@ public class AdminServlet extends HttpServlet {
         List<Categories> categories = null;        
         try {
             users = as.getAll();
-            categories = is.getAllCategories();
+            categories = cs.getAllCategories();
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,7 +74,7 @@ public class AdminServlet extends HttpServlet {
         int admin = 0;
                
         AccountService as = new AccountService();
-        InventoryService is = new InventoryService();
+        CategoryService cs = new CategoryService();
         
         try {
             switch (action) {
@@ -86,7 +87,7 @@ public class AdminServlet extends HttpServlet {
                     }   break;
                 case "c_delete":
                     String selectedCategory = request.getParameter("selectedCategory");
-                    if (is.delete(selectedCategory)) {
+                    if (cs.delete(selectedCategory)) {
                         request.setAttribute("message", "Deleting the category has been complete!");
                     } else {
                         request.setAttribute("message", "The administrator cannot be removed!");
@@ -104,7 +105,7 @@ public class AdminServlet extends HttpServlet {
                         request.setAttribute("message", "Updating the user has been complete!");
                     }   break;
                 case "category_edit":
-                    if (is.update(categoryId,categoryName)) {
+                    if (cs.update(categoryId,categoryName)) {
                         request.setAttribute("message", "Updating the category has been complete!");
                     }   break;
                 case "user_add":
@@ -115,7 +116,7 @@ public class AdminServlet extends HttpServlet {
                         request.setAttribute("message", "Please fill in the form!");
                     }   break;
                 case "category_add":
-                    if (is.insert(categoryName)) {
+                    if (cs.insert(categoryName)) {
                         request.setAttribute("message", "Adding the Category has been complete!");
                     } else {
                         request.setAttribute("message", "Please fill in the form!");
@@ -131,7 +132,7 @@ public class AdminServlet extends HttpServlet {
         List<Categories> categories = null;        
         try {
             users = as.getAll();
-            categories = is.getAllCategories();
+            categories = cs.getAllCategories();
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

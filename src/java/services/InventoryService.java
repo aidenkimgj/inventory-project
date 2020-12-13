@@ -17,14 +17,15 @@ public class InventoryService {
         categoryDB = new CategoriesDB();
         itemDB = new ItemsDB();
     }
-    public List<Categories> getAllCategories() throws Exception {
-        return categoryDB.getAllCategories();
-    }
 
     public List<Items> getAllItems(String username) throws Exception {
         return itemDB.getAllItems(username);
     }
 
+    public Items get(int selectedItem) throws Exception {
+        return itemDB.get(selectedItem);
+    }
+    
     public boolean delete(int itemID) throws Exception {
         Items item = itemDB.get(itemID);
         return itemDB.delete(item);
@@ -44,29 +45,18 @@ public class InventoryService {
         return itemDB.insert(item);
     }
 
-    public Categories get(int selectedCategory) throws Exception {
-        return categoryDB.get(selectedCategory);
-    }
-
-    public boolean insert(String categoryName) throws Exception {
-        Categories category = new Categories();
+    public boolean update(int itemID, int categoryID, String itemName, double price) throws Exception{
+        Items item = itemDB.get(itemID);
+        Categories pre_category = item.getCategory();
+        pre_category.getItemsList().remove(item);
+        categoryDB.update(pre_category);
         
-        category.setCategoryName(categoryName);
+        Categories category = categoryDB.get(categoryID);
         
-        return categoryDB.insert(category);
-    }
-
-    public boolean update(String categoryID, String categoryName) throws Exception {
-        int categoryId = Integer.parseInt(categoryID);
-        Categories category = new Categories(categoryId, categoryName);
+        item.setCategory(category);
+        item.setItemName(itemName);
+        item.setPrice(price);
         
-        return categoryDB.update(category);
+        return itemDB.update(item);
     }
-    
-    public boolean delete(String categoryID) throws Exception {
-        int categoryId = Integer.parseInt(categoryID);
-        Categories category = categoryDB.get(categoryId);
-        return categoryDB.delete(category);
-    }
-    
 }

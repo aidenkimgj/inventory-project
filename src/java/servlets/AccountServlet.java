@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -57,7 +56,9 @@ public class AccountServlet extends HttpServlet {
                 }
                 
                 if (as.update(username, password, email, firstname, lastname, active, admin)) {
-                    request.setAttribute("message", "Updating the user has been complete!");
+                    request.setAttribute("update", "Updating the user has been complete!");
+                } else {
+                    request.setAttribute("check", "Password is too short. Must be at least 8 characters long.");
                 }
             }
         } catch (Exception ex) {

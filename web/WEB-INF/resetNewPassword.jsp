@@ -42,7 +42,10 @@
                     <i class="fas fa-laptop-house"></i>
                     <h2>Enter a new Password</h2>
                 </div>
-                
+                <div class="reset_mention">
+                    <p>Please enter new password which must be at least 8 characters long</p>
+                    <p>Do not enter previous password!!</p>
+                </div>
                 <div class="login_input_div">
                     <p> New Password </p>
                     <input type="password" name="newpassword" placeholder="Please enter new password"/>

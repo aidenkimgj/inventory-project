@@ -66,9 +66,12 @@ public class ItemsDB {
         
         try {
             Users user = item.getOwner();
+            Categories category = item.getCategory();
             user.getItemsList().remove(item);
+            category.getItemsList().remove(item);
             trans.begin();
             em.remove(em.merge(item));
+            em.merge(category);
             em.merge(user);
             trans.commit();
             return true;
@@ -98,5 +101,24 @@ public class ItemsDB {
         } finally {
             em.close();
         }
+    }
+
+    public boolean update(Items item) throws Exception {
+        em = DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+        Categories category = item.getCategory();
+        category.getItemsList().add(item);
+        try {
+            trans.begin();
+            em.merge(item);
+            em.merge(category); 
+            trans.commit();
+            return true;
+        } catch (Exception ex) {
+            trans.rollback();
+            throw new Exception("Error updating item");
+        } finally {
+            em.close();
+        }        
     }
 }

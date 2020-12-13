@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
         <link href="assets/css/base.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/80ee7ec6c8.js" crossorigin="anonymous"></script>
-        <script src="assets/scripts/header.js" defer></script>       
+        <script src="assets/scripts/header.js" defer></script>
+        
     </head>
     <body>
          <header>
@@ -39,7 +41,43 @@
         </header>
         
         <div class="login_container">
-                      
+
+           <c:if test="${logout != null}">
+                <script>
+                     alert('You have successully logged out.');
+                     document.location.href="login";
+                </script>
+            </c:if>
+            <c:if test="${login != null}">
+                <script>
+                     alert('Invalid login!');
+                     document.location.href="login";
+                </script>
+            </c:if>
+            <c:if test="${active != null}">
+                <script>
+                     alert('Please activate your account!');
+                     document.location.href="login";
+                </script>
+            </c:if>
+            <c:if test="${actived != null}">
+                <script>
+                     alert('Your account has been activated!');
+                     document.location.href="login";
+                </script>
+            </c:if>                 
+            <c:if test="${email != null}">
+                <script>
+                     alert('Account activation email has been sent to your email which has been registered our service.');
+                     document.location.href="login";
+                </script>
+            </c:if>  
+            <c:if test="${account != null}">
+                <script>
+                     alert('Your account already activated.');
+                     document.location.href="login";
+                </script>
+            </c:if>  
             <form action="login" method="post">
                 <div class="login_intro">
                     <i class="fas fa-laptop-house"></i>

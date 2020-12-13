@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
         if (action != null) {
             session.invalidate();
             session = request.getSession();
-            request.setAttribute("message", "You have successully logged out.");
+            request.setAttribute("logout", "logout");
         }
         
         if (session.getAttribute("username") == null ) {
@@ -43,12 +44,12 @@ public class LoginServlet extends HttpServlet {
             Users user = as.login(username, password);
             
             if (user == null) {
-                request.setAttribute("message", "Invalid login");
+                request.setAttribute("login", "Invalid login");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
                 
             if (!user.getActive()) {
-                request.setAttribute("message", "You are non-active user!");
+                request.setAttribute("active", "You are non-active user!");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             
             } else {

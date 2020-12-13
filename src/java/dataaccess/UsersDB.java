@@ -12,7 +12,7 @@ public class UsersDB {
     private EntityTransaction trans;
     
     public Users getUser(String username) throws Exception {
-          em = DBUtil.getEmFactory().createEntityManager();
+         em = DBUtil.getEmFactory().createEntityManager();
         
         try {
             Users user = em.find(Users.class, username);
@@ -22,7 +22,6 @@ public class UsersDB {
         } finally {
             em.close();
         }
-    
     }
 
     public List<Users> getAll() throws Exception {
@@ -113,3 +112,4 @@ public class UsersDB {
         }
     }
 }
+

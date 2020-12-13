@@ -41,14 +41,33 @@
             </nav>
         </header>
         <div class="admin_container">
+            <c:if test="${update != null}">
+                <script>
+                     alert('Updating the user has been complete!');
+                     document.location.href="account";
+                </script>
+            </c:if>
+            <c:if test="${check != null}">
+                <script>
+                     alert('Password is too short. Must be at least 8 characters long!');
+                     document.location.href="account";
+                </script>
+            </c:if>
+            <c:if test="${message != null}">
+                <script>
+                     alert('Whoops.  Could not perform that action.');
+                     document.location.href="account";
+                </script>
+            </c:if>                
             <div class="admin_title">
                 <h2>Account for <strong>${userAccount.firstName} ${userAccount.lastName}</strong></h2>
             </div>
             
             <div class="account_table">
                 <h2>Manage Account</h2>
+                
                 <form action="account" method="POST">
-<!--                        <h3>Edit User</h3>-->
+
                         <div class="admin_input_div">
                             <p> Username </p>
                             <input type="text" name="username" value="${userAccount.username}" readonly>
@@ -56,7 +75,7 @@
                         
                         <div class="admin_input_div">
                             <p> Password </p>
-                            <input type="password" name="password" value="${userAccount.password}">
+                            <input type="password" name="password" value="">
                         </div>
                                                 
                         <div class="admin_input_div">

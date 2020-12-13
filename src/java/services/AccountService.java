@@ -43,7 +43,13 @@ public class AccountService {
     public Users get(String username) throws Exception {
         return userDB.getUser(username);
     }
-     
+
+    public Users getUserByUUID(String uuid) throws Exception {
+        Users user = userDB.getByUUID(uuid);
+        
+        return user;
+    }
+    
     public List<Users> getAll() throws Exception {
         return userDB.getAll();
     }
@@ -78,21 +84,22 @@ public class AccountService {
 
     public boolean update(String username, String password, String email, String firstname, String lastname, boolean active, int admin) throws Exception {
         
-        try {
-            PasswordUtil.checkPasswordStrength(password);
-            System.out.println("Password is valid.");
-        } catch (Exception ex ) {
-            System.out.println(ex.getMessage());
-            return false;
-        }
-        
+
+        System.out.println(password);
         Users user = userDB.getUser(username);
         String salt = user.getUserSalt();
+        String hashedPass = PasswordUtil.hashPassword(username + password + salt);
         
-        if (password.equals(user.getPassword())) {
-            user.setPassword(password);
-            user.setUserSalt(salt);
-        } else {
+        if (!(password.trim().isEmpty())&&(!hashedPass.equals(user.getPassword()))){
+            
+            try {
+                PasswordUtil.checkPasswordStrength(password);
+                System.out.println("Password is valid.");
+            } catch (Exception ex ) {
+                System.out.println(ex.getMessage());
+                return false;
+            }
+            
             String newSalt = PasswordUtil.getSalt();
             String newPass = PasswordUtil.hashPassword(username + password + newSalt);
             user.setPassword(newPass);
@@ -191,18 +198,20 @@ public class AccountService {
         try {
             Users user = userDB.getByUUID(uuid);
             user.setActive(true);
-            user.setUserUUID(null);
             return userDB.update(user);
         } catch (Exception ex) {
             return false;
         }
     }
 
-    public void activationEmail(String email, String path, String url) {
+    public boolean activationEmail(String email, String path, String url) {
        try {
+           
             String uuid = UUID.randomUUID().toString();
             Users user = userDB.getByEmail(email);
-            
+            if (user.getActive()) {
+                return false;
+            }
             user.setUserUUID(uuid);
             userDB.update(user);
 
@@ -218,12 +227,31 @@ public class AccountService {
                 
         
             GmailService.sendMail(to, subject, template, tags);
+            return true;
         } catch (Exception ex) {
+            
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+       
     }
 
-    public void welcomeEmail(String email, String path, String url) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void welcomeEmail(String email, String path, String url) throws Exception {
+        Users user = userDB.getByEmail(email);
+        user.setUserUUID(null);
+        userDB.update(user);
+        String to = user.getEmail();
+        String subject = "Welcome to Aiden's Iventory Service";
+        String template = path + "/emailtemplates/welcome.html";
+        String link = url + "?welcome=welcome";
+
+        HashMap<String, String> tags = new HashMap<>();
+        tags.put("firstname", user.getFirstName());
+        tags.put("lastname", user.getLastName());
+        tags.put("link", link);
+               
+        GmailService.sendMail(to, subject, template, tags);
     }
+
+
 }

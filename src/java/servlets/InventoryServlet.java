@@ -13,6 +13,7 @@ import models.Categories;
 import models.Items;
 import models.Users;
 import services.AccountService;
+import services.CategoryService;
 import services.InventoryService;
 
 public class InventoryServlet extends HttpServlet {
@@ -22,17 +23,25 @@ public class InventoryServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+        String action = request.getParameter("action");
         AccountService as = new AccountService();
         InventoryService is = new InventoryService();
-        try {
-                Users user = as.get(username);
-                session.setAttribute("user", user);
-               
-        } catch (Exception ex) {
-                Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+        CategoryService cs = new CategoryService();
+        
+        if (action != null && action.equals("view")) {
+            int selectedItem = Integer.parseInt(request.getParameter("selectedItem"));
+            try {
+                Items item = is.get(selectedItem);
+                request.setAttribute("selectedItem", item);
+            } catch (Exception ex) {
+                    Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
         List<Items> items = null;
         try {
+            Users user = as.get(username);
+            session.setAttribute("user", user);
             items = is.getAllItems(username);
         } catch (Exception ex) {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -40,16 +49,13 @@ public class InventoryServlet extends HttpServlet {
                 
         List<Categories> categories = null;
         try {
-            categories = is.getAllCategories();
+            categories = cs.getAllCategories();
         } catch (Exception ex) {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         session.setAttribute("categories", categories);
-        
-        request.setAttribute("firstname", session.getAttribute("firstname"));
-        request.setAttribute("lastname", session.getAttribute("lastname"));
         request.setAttribute("items", items);
-        request.setAttribute("categories", session.getAttribute("categories"));
+        
         getServletContext().getRequestDispatcher("/WEB-INF/inventory.jsp").forward(request, response);
     }
 
@@ -63,22 +69,42 @@ public class InventoryServlet extends HttpServlet {
         String item = request.getParameter("name");
         String price_S = request.getParameter("price");
         String selectedItem = request.getParameter("selectedItem");
-        
+        int itemID;
+        double price;
+        int categoryID;
         InventoryService is = new InventoryService();
-        
+
         try {
-            if (action.equals("delete")) {
-                int itemID = Integer.parseInt(selectedItem);
-                if(is.delete(itemID)) {
-                    request.setAttribute("message", "Deleting the item has been complete!");
-                }
-            } else if (action.equals("add")) {
-                double price = Double.parseDouble(price_S);
-                int categoryID = Integer.parseInt(categoryId_S);
-                
-                if(is.insert(categoryID, item, price, username)) {
-                    request.setAttribute("message", "Adding the item has been complete!");
-                }
+            switch (action) {
+                case "delete":
+                    itemID = Integer.parseInt(selectedItem);
+                    if(is.delete(itemID)) {
+                        request.setAttribute("message", "Deleting the item has been complete!");
+                    }   break;
+                case "add":
+                    price = Double.parseDouble(price_S);
+                    categoryID = Integer.parseInt(categoryId_S);
+                    if(is.insert(categoryID, item, price, username)) {
+                        request.setAttribute("message", "Adding the item has been complete!");
+                    }   break;
+//                case "edit":
+//                    System.out.print("HI");
+//                    itemID = Integer.parseInt(selectedItem);
+//                    price = Double.parseDouble(price_S);
+//                    categoryID = Integer.parseInt(categoryId_S);
+//                    System.out.println(itemID+" _____"+price+"____"+categoryID);
+//                    if(is.update(itemID, categoryID, item, price))
+//                        request.setAttribute("message", "Udating the item has been complete!");
+//                    
+//                    break;
+                default:
+                    itemID = Integer.parseInt(selectedItem);
+                    price = Double.parseDouble(price_S);
+                    categoryID = Integer.parseInt(categoryId_S);
+                    System.out.println(itemID+" _____"+price+"____"+categoryID);
+                    if(is.update(itemID, categoryID, item, price))
+                        request.setAttribute("message", "Udating the item has been complete!");
+                    break;
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Whoops.  Could not perform that action.");
@@ -90,11 +116,9 @@ public class InventoryServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.setAttribute("firstname", session.getAttribute("firstname"));
-        request.setAttribute("lastname", session.getAttribute("lastname"));
-        request.setAttribute("items", items);
-        request.setAttribute("categories", session.getAttribute("categories"));
+  
+       request.setAttribute("items", items);
+
         getServletContext().getRequestDispatcher("/WEB-INF/inventory.jsp").forward(request, response);
     }
 }

@@ -47,7 +47,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             } else {
-                request.setAttribute("message", "Password has not updated");
+                request.setAttribute("message", "Password condition not matched!");
                 request.setAttribute("uuid", uuid);
                 getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
             }
