@@ -44,40 +44,59 @@
 
            <c:if test="${logout != null}">
                 <script>
-                     alert('You have successully logged out.');
-                     document.location.href="login";
+                    alert('You have successully logged out.');
+                    document.location.href="login";
                 </script>
             </c:if>
             <c:if test="${login != null}">
                 <script>
-                     alert('Invalid login!');
-                     document.location.href="login";
+                    alert('Invalid login!');
+                    document.location.href="login";
                 </script>
             </c:if>
             <c:if test="${active != null}">
                 <script>
-                     alert('Please activate your account!');
-                     document.location.href="login";
+                    alert('Please activate your account!');
+                    document.location.href="login";
                 </script>
             </c:if>
             <c:if test="${actived != null}">
                 <script>
-                     alert('Your account has been activated!');
-                     document.location.href="login";
+                    alert('Your account has been activated!');
+                    document.location.href="login";
                 </script>
             </c:if>                 
             <c:if test="${email != null}">
                 <script>
-                     alert('Account activation email has been sent to your email which has been registered our service.');
-                     document.location.href="login";
+                    alert('Account activation email has been sent to your email which has been registered our service.');
+                    document.location.href="login";
                 </script>
             </c:if>  
             <c:if test="${account != null}">
                 <script>
-                     alert('Your account already activated.');
-                     document.location.href="login";
+                    alert('Your account already activated.');
+                    document.location.href="login";
                 </script>
             </c:if>  
+            <c:if test="${activeEmail != null}">
+                <script>
+                    alert('Your account has been successfully created.');
+                    alert('An account activation email has been sent to the email registered with our service.!');
+                    document.location.href="login";
+                </script>
+            </c:if> 
+            <c:if test="${resetEmail != null}">
+                <script>
+                    alert('New password link has been sent to the email registered with our service!');
+                    document.location.href="login";
+                </script>
+            </c:if>
+            <c:if test="${passChange != null}">
+                <script>
+                    alert('Password has been changed!');
+                    document.location.href="login";
+                </script>
+            </c:if>
             <form action="login" method="post">
                 <div class="login_intro">
                     <i class="fas fa-laptop-house"></i>

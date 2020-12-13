@@ -43,6 +43,31 @@
         </header>
         
         <div class="admin_container">
+            
+            <c:if test="${deleteItem != null}">
+                <script>
+                    alert('Deleting the item has been completed!');
+                    document.location.href="inventory";
+                </script>
+            </c:if>
+            <c:if test="${addItem != null}">
+                <script>
+                    alert('Adding the item has been completed!');
+                    document.location.href="inventory";
+                </script>
+            </c:if>                        
+            <c:if test="${updateItem != null}">
+                <script>
+                    alert('Udating the item has been completed!');
+                    document.location.href="inventory";
+                </script>
+            </c:if>
+            <c:if test="${message != null}">
+                <script>
+                    alert('Whoops.  Could not perform that action.');
+                    document.location.href="inventory";
+                </script>
+            </c:if>            
             <div class="admin_title">
                 <h2>Inventory for <strong>${user.firstName} ${user.lastName}</strong></h2>
             </div>

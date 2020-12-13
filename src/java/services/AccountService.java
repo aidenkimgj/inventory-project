@@ -65,6 +65,7 @@ public class AccountService {
             System.out.println("Password is valid.");
         } catch (Exception ex ) {
             System.out.println(ex.getMessage());
+            
         }
         String salt = PasswordUtil.getSalt();
         String pass = PasswordUtil.hashPassword(username + password + salt);

@@ -43,13 +43,15 @@ public class CreateAccountServlet extends HttpServlet {
                 
                if (as.insert(username, password, email, firstname, lastname, active)) {
                     as.activationEmail(email, path, url);
-                    request.setAttribute("message", "Adding the user has been complete!");
+                    request.setAttribute("activeEmail", "Adding the user has been complete!");
                 } else {
-                    request.setAttribute("message", "Please fill in the form!");
+                    request.setAttribute("unaddUser", "Please fill in the form!");
+                    getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
                 }  
             }
         } catch (Exception ex) {
-            request.setAttribute("message", "Whoops.  Could not perform that action.");
+            request.setAttribute("message", "Password must be at least 8 characters long.");
+            getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }

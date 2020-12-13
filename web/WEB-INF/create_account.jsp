@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,6 +39,19 @@
         </header>
         
         <div class="create_container">
+            <c:if test="${unaddUser != null}">
+                <script>
+                    alert('Please fill in the form exactly!');
+                    document.location.href="create";
+                </script>
+            </c:if>
+            <c:if test="${message != null}">
+                <script>
+                    alert('Password must be at least 8 characters long.');
+                    document.location.href="create";
+                </script>
+            </c:if>
+            
             <form action="create" method="post">
                 <div class="create_intro">
                     <i class="fas fa-laptop-house"></i>

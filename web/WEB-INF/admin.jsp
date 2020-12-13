@@ -43,6 +43,74 @@
         </header>
         <div class="admin_container">
            
+            <c:if test="${deleteUser != null}">
+                <script>
+                     alert('Deleting the user has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${undeleteUser != null}">
+                <script>
+                     alert('The administrator cannot be removed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${deleteCategory != null}">
+                <script>
+                     alert('Deleting the category has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>            
+            <c:if test="${undeleteCategory != null}">
+                <script>
+                     alert('Failed to delete category.!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${updateUser != null}">
+                <script>
+                     alert('Updating the user has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${updateCategory != null}">
+                <script>
+                     alert('Updating the category has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${addUser != null}">
+                <script>
+                     alert('Adding the user has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${unaddUser != null}">
+                <script>
+                     alert('Please fill in the form!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${addCategory != null}">
+                <script>
+                     alert('Adding the Category has been completed!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${unaddCategory != null}">
+                <script>
+                     alert('Please fill in the form!');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+            <c:if test="${message != null}">
+                <script>
+                     alert('Whoops.  Could not perform that action.');
+                     document.location.href="admin";
+                </script>
+            </c:if>
+
+
             <div class="admin_header">
                 <div class="admin_title">
                      

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,14 +37,15 @@
                 </a>
             </nav>
         </header>
-        <div class="login_container"> 
+        <div class="login_container">
+ 
             <form action="reset" method="post">
                 <div class="login_intro">
                     <i class="fas fa-laptop-house"></i>
                     <h2>Enter a new Password</h2>
                 </div>
                 <div class="reset_mention">
-                    <p>Please enter new password which must be at least 8 characters long</p>
+                    <p>Please enter new password which must be at least 8 characters long.</p>
                     <p>Do not enter previous password!!</p>
                 </div>
                 <div class="login_input_div">
@@ -56,6 +58,12 @@
                 </div>
              </form>
         </div>
+                    <c:if test="${message != null}">
+                <script>
+                    alert('Password condition not matched!');
+                    document.location.href="reset";
+                </script>
+            </c:if>
                        
         <footer class="login_footer">
             <h3>Copyright © Aiden's Inventory Service</h3>

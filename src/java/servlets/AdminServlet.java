@@ -81,46 +81,46 @@ public class AdminServlet extends HttpServlet {
                 case "u_delete":
                     String selectedUsername = request.getParameter("selectedUsername");
                     if (as.delete(selectedUsername)) {
-                        request.setAttribute("message", "Deleting the user has been complete!");
+                        request.setAttribute("deleteUser", "Deleting the user has been complete!");
                     } else {
-                        request.setAttribute("message", "The administrator cannot be removed!");
+                        request.setAttribute("undeleteUser", "The administrator cannot be removed!");
                     }   break;
                 case "c_delete":
                     String selectedCategory = request.getParameter("selectedCategory");
                     if (cs.delete(selectedCategory)) {
-                        request.setAttribute("message", "Deleting the category has been complete!");
+                        request.setAttribute("deleteCategory", "Deleting the category has been complete!");
                     } else {
-                        request.setAttribute("message", "The administrator cannot be removed!");
+                        request.setAttribute("undeleteCategory", "Failed to delete category.");
                     }   break;
                 case "user_edit":
                     if (activeCheck == null) {
                         active = false;
                     } else if (activeCheck.equals("on")) {
                         active = true;
-                    }   if (adminCheck == null) {
+                    } if (adminCheck == null) {
                         admin = 2;
                     } else if (adminCheck.equals("on")) {
                         admin = 1;
-                    }   if (as.update(username, password, email, firstname, lastname, active, admin)) {
-                        request.setAttribute("message", "Updating the user has been complete!");
-                    }   break;
+                    } if (as.update(username, password, email, firstname, lastname, active, admin)) {
+                        request.setAttribute("updateUser", "Updating the user has been complete!");
+                    } break;
                 case "category_edit":
                     if (cs.update(categoryId,categoryName)) {
-                        request.setAttribute("message", "Updating the category has been complete!");
-                    }   break;
+                        request.setAttribute("updateCategory", "Updating the category has been complete!");
+                    } break;
                 case "user_add":
                     active = true;
                     if (as.insert(username, password, email, firstname, lastname, active)) {
-                        request.setAttribute("message", "Adding the user has been complete!");
+                        request.setAttribute("addUser", "Adding the user has been complete!");
                     } else {
-                        request.setAttribute("message", "Please fill in the form!");
-                    }   break;
+                        request.setAttribute("unaddUser", "Please fill in the form!");
+                    } break;
                 case "category_add":
                     if (cs.insert(categoryName)) {
-                        request.setAttribute("message", "Adding the Category has been complete!");
+                        request.setAttribute("addCategory", "Adding the Category has been complete!");
                     } else {
-                        request.setAttribute("message", "Please fill in the form!");
-                    }   break;
+                        request.setAttribute("unaddCategory", "Please fill in the form!");
+                    } break;
                 default:
                     break;  
             }

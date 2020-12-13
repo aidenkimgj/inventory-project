@@ -79,31 +79,22 @@ public class InventoryServlet extends HttpServlet {
                 case "delete":
                     itemID = Integer.parseInt(selectedItem);
                     if(is.delete(itemID)) {
-                        request.setAttribute("message", "Deleting the item has been complete!");
+                        request.setAttribute("deleteItem", "Deleting the item has been completed!");
                     }   break;
                 case "add":
                     price = Double.parseDouble(price_S);
                     categoryID = Integer.parseInt(categoryId_S);
                     if(is.insert(categoryID, item, price, username)) {
-                        request.setAttribute("message", "Adding the item has been complete!");
+                        request.setAttribute("addItem", "Adding the item has been completed!");
                     }   break;
-//                case "edit":
-//                    System.out.print("HI");
-//                    itemID = Integer.parseInt(selectedItem);
-//                    price = Double.parseDouble(price_S);
-//                    categoryID = Integer.parseInt(categoryId_S);
-//                    System.out.println(itemID+" _____"+price+"____"+categoryID);
-//                    if(is.update(itemID, categoryID, item, price))
-//                        request.setAttribute("message", "Udating the item has been complete!");
-//                    
-//                    break;
+
                 default:
                     itemID = Integer.parseInt(selectedItem);
                     price = Double.parseDouble(price_S);
                     categoryID = Integer.parseInt(categoryId_S);
-                    System.out.println(itemID+" _____"+price+"____"+categoryID);
+
                     if(is.update(itemID, categoryID, item, price))
-                        request.setAttribute("message", "Udating the item has been complete!");
+                        request.setAttribute("updateItem", "Udating the item has been completed!");
                     break;
             }
         } catch (Exception ex) {
