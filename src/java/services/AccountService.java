@@ -56,7 +56,10 @@ public class AccountService {
 
     public boolean insert(String username, String password, String email, String firstname, String lastname, boolean activation) throws Exception {
         
-        if(username.equals("") || password.equals("") || email.equals("") || firstname.equals("") || lastname.equals("")) {
+        if (username.equals("") || password.equals("") || email.equals("") || firstname.equals("") || lastname.equals("")) {
+            return false;
+        }
+        if (userDB.getUser(username).getUsername().equals(username)) {
             return false;
         }
         
