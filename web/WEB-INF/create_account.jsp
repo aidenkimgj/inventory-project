@@ -11,7 +11,7 @@
         <script src="assets/scripts/header.js" defer></script>        
     </head>
     <body>
-         <header>
+        <header>
             <nav class="navbar">
                 <div class="navbar_logo">
                     <i class="fas fa-laptop-house"></i>
@@ -22,9 +22,9 @@
                     <li><a href="account">Account</a></li>
                     <li><a href="admin">Admin</a></li>
                     <li><a href="inventory">Inventory</a></li>
-                    <c:if test="${username == null}">
+                        <c:if test="${username == null}">
                         <li><a href="login">Login</a></li>
-                    </c:if>
+                        </c:if>
                 </ul>
 
                 <ul class="navbar_icons">
@@ -37,21 +37,33 @@
                 </a>
             </nav>
         </header>
-        
+
         <div class="create_container">
-            <c:if test="${unaddUser != null}">
+            <c:if test="${unaddUser1 != null}">
                 <script>
-                    alert('Please fill in the form exactly! or Username already exsist!');
-                    document.location.href="create";
+                    alert('Please fill in the form exactly!');
+                    document.location.href = "create";
+                </script>
+            </c:if>
+            <c:if test="${unaddUser2 != null}">
+                <script>
+                    alert('Username already exsist!');
+                    document.location.href = "create";
                 </script>
             </c:if>
             <c:if test="${message != null}">
                 <script>
                     alert('Password must be at least 8 characters long.');
-                    document.location.href="create";
+                    document.location.href = "create";
                 </script>
             </c:if>
-            
+            <c:if test="${alert != null}">
+                <script>
+                    alert('System is something wrong, Please try again.');
+                    document.location.href = "create";
+                </script>
+            </c:if>
+
             <form action="create" method="post">
                 <div class="create_intro">
                     <i class="fas fa-laptop-house"></i>
@@ -62,22 +74,22 @@
                         <p> First name </p>
                         <input type="text" name="firstname" placeholder="Enter First name"/>
                     </div>
-                    
+
                     <div class="create_input_div">
                         <p> Last name </p>
                         <input type="text" name="lastname" placeholder="Enter Last name"/>
                     </div>
-                    
+
                     <div class="create_input_div">
                         <p> Username </p>
                         <input type="text" name="username" placeholder="Enter Username"/>
                     </div>
-                    
+
                     <div class="create_input_div">
                         <p> Email </p>
                         <input type="text" name="email" placeholder="Enter Email"/>
                     </div>
-                    
+
                     <div class="create_input_div">
                         <p> Password </p>
                         <input type="password" name="password" placeholder="Enter Password"/>    
@@ -90,7 +102,7 @@
             </form>
 
         </div>
-        
+
         <footer>
             <h3>Copyright © Aiden's Inventory Service</h3>
         </footer>

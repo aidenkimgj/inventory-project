@@ -40,17 +40,23 @@ public class CreateAccountServlet extends HttpServlet {
         
         try {
             if (action.equals("user_add")) {
-                
-               if (as.insert(username, password, email, firstname, lastname, active)) {
+               
+               if (as.insert(username, password, email, firstname, lastname, active) == 3) {
                     as.activationEmail(email, path, url);
                     request.setAttribute("activeEmail", "Adding the user has been complete!");
-                } else {
-                    request.setAttribute("unaddUser", "Please fill in the form!");
+                } else if (as.insert(username, password, email, firstname, lastname, active) == 1) {
+                    request.setAttribute("unaddUser1", "Please fill in the form!");
                     getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
-                }  
+                } else if (as.insert(username, password, email, firstname, lastname, active) == 2) {
+                    request.setAttribute("unaddUser2", "UserName already exsit!");
+                    getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("message", "Password must be at least 8 characters long.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
+                }
             }
         } catch (Exception ex) {
-            request.setAttribute("message", "Password must be at least 8 characters long.");
+            request.setAttribute("alert", "System is something wrong.");
             getServletContext().getRequestDispatcher("/WEB-INF/create_account.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);

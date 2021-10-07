@@ -15,66 +15,74 @@ import models.Role;
 import util.PasswordUtil;
 
 public class AccountService {
-    
+
     private UsersDB userDB;
     private RoleDB roleDB;
     private ItemsDB itemDB;
-    
-     public AccountService() {
+
+    public AccountService() {
         userDB = new UsersDB();
         roleDB = new RoleDB();
         itemDB = new ItemsDB();
     }
+
     public Users login(String username, String password) throws Exception {
-                
+
         try {
             String salt = userDB.getUser(username).getUserSalt();
-            String pass = PasswordUtil.hashPassword(username + password + salt); 
+            String pass = PasswordUtil.hashPassword(username + password + salt);
             Users user = userDB.getUser(username);
-                        System.out.println(pass);
-            if(pass.equals(user.getPassword())) {
+            System.out.println(pass);
+            if (pass.equals(user.getPassword())) {
                 return user;
-            }    
-        } catch(Exception ex) {
-              System.out.println(ex.getMessage());
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
         return null;
     }
+
     public Users get(String username) throws Exception {
         return userDB.getUser(username);
     }
 
     public Users getUserByUUID(String uuid) throws Exception {
         Users user = userDB.getByUUID(uuid);
-        
+
         return user;
     }
-    
+
     public List<Users> getAll() throws Exception {
         return userDB.getAll();
     }
 
-    public boolean insert(String username, String password, String email, String firstname, String lastname, boolean activation) throws Exception {
-        
+    public int insert(String username, String password, String email, String firstname, String lastname, boolean activation) throws Exception {
+
         if (username.equals("") || password.equals("") || email.equals("") || firstname.equals("") || lastname.equals("")) {
-            return false;
-        }
-        if (userDB.getUser(username).getUsername().equals(username)) {
-            return false;
+            return 1;
         }
         
         try {
+            if (userDB.getUser(username).getUsername().equals(username)) {
+                return 2;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage() + "Hi Exception");
+        }
+
+        try {
             PasswordUtil.checkPasswordStrength(password);
             System.out.println("Password is valid.");
-        } catch (Exception ex ) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            
+            return 4;
         }
+        
         String salt = PasswordUtil.getSalt();
         String pass = PasswordUtil.hashPassword(username + password + salt);
         Users user = new Users(username);
         Role role = roleDB.get(2);
-                    
+
         user.setPassword(pass);
         user.setEmail(email);
         user.setFirstName(firstname);
@@ -83,55 +91,57 @@ public class AccountService {
         user.setRole(role);
         user.setUserSalt(salt);
         
-        return userDB.insert(user);
+        if(userDB.insert(user)) {
+            return 3;
+        }
+        return 5;
     }
 
     public boolean update(String username, String password, String email, String firstname, String lastname, boolean active, int admin) throws Exception {
-        
 
         System.out.println(password);
         Users user = userDB.getUser(username);
         String salt = user.getUserSalt();
         String hashedPass = PasswordUtil.hashPassword(username + password + salt);
-        
-        if (!(password.trim().isEmpty())&&(!hashedPass.equals(user.getPassword()))){
-            
+
+        if (!(password.trim().isEmpty()) && (!hashedPass.equals(user.getPassword()))) {
+
             try {
                 PasswordUtil.checkPasswordStrength(password);
                 System.out.println("Password is valid.");
-            } catch (Exception ex ) {
+            } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 return false;
             }
-            
+
             String newSalt = PasswordUtil.getSalt();
             String newPass = PasswordUtil.hashPassword(username + password + newSalt);
             user.setPassword(newPass);
             user.setUserSalt(newSalt);
-        } 
-               
+        }
+
         Role role = roleDB.get(admin);
-                
+
         user.setEmail(email);
         user.setFirstName(firstname);
         user.setLastName(lastname);
         user.setActive(active);
         user.setRole(role);
-                
-        return userDB.update(user);       
+
+        return userDB.update(user);
     }
-    
+
     public boolean delete(String username) throws Exception {
         Users deletedUser = userDB.getUser(username);
-          
+
         if (deletedUser.getRole().getRoleid() == 1 && deletedUser.getRole().getRolename().equals("system admin")) {
             return false;
         }
         List<Items> userItem = itemDB.getAllItems(username);
-        
+
         if (userItem.size() == 0) {
             return userDB.delete(deletedUser);
-        } else { 
+        } else {
             if (itemDB.deleteAll(deletedUser) > 0) {
                 return userDB.delete(deletedUser);
             }
@@ -139,14 +149,14 @@ public class AccountService {
         return false;
     }
 
-    public boolean changePassword(String uuid, String newPassword)  {
+    public boolean changePassword(String uuid, String newPassword) {
         try {
             PasswordUtil.checkPasswordStrength(newPassword);
             System.out.println("Password is valid.");
         } catch (Exception ex) {
             return false;
         }
-        
+
         try {
             Users user = userDB.getByUUID(uuid);
             System.out.println(user.getFirstName());
@@ -157,14 +167,14 @@ public class AccountService {
                 System.out.println("Do not enter previous password!");
                 return false;
             }
-            
+
             String newSalt = PasswordUtil.getSalt();
             String newPass = PasswordUtil.hashPassword(user.getUsername() + newPassword + newSalt);
-            
+
             user.setPassword(newPass);
             user.setUserSalt(newSalt);
             user.setUserUUID(null);
-            
+
             return userDB.update(user);
         } catch (Exception ex) {
             return false;
@@ -172,11 +182,11 @@ public class AccountService {
     }
 
     public void resetPassword(String email, String path, String url) {
-        
+
         try {
             String uuid = UUID.randomUUID().toString();
             Users user = userDB.getByEmail(email);
-            
+
             user.setUserUUID(uuid);
             userDB.update(user);
 
@@ -190,8 +200,7 @@ public class AccountService {
             tags.put("lastname", user.getLastName());
             tags.put("username", user.getUsername());
             tags.put("link", link);
-                
-        
+
             GmailService.sendMail(to, subject, template, tags);
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,8 +218,8 @@ public class AccountService {
     }
 
     public boolean activationEmail(String email, String path, String url) {
-       try {
-           
+        try {
+
             String uuid = UUID.randomUUID().toString();
             Users user = userDB.getByEmail(email);
             if (user.getActive()) {
@@ -228,16 +237,15 @@ public class AccountService {
             tags.put("firstname", user.getFirstName());
             tags.put("lastname", user.getLastName());
             tags.put("link", link);
-                
-        
+
             GmailService.sendMail(to, subject, template, tags);
             return true;
         } catch (Exception ex) {
-            
+
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-       
+
     }
 
     public void welcomeEmail(String email, String path, String url) throws Exception {
@@ -253,9 +261,8 @@ public class AccountService {
         tags.put("firstname", user.getFirstName());
         tags.put("lastname", user.getLastName());
         tags.put("link", link);
-               
+
         GmailService.sendMail(to, subject, template, tags);
     }
-
 
 }

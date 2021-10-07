@@ -110,11 +110,14 @@ public class AdminServlet extends HttpServlet {
                     } break;
                 case "user_add":
                     active = true;
-                    if (as.insert(username, password, email, firstname, lastname, active)) {
+                    if (as.insert(username, password, email, firstname, lastname, active) == 3) {
                         request.setAttribute("addUser", "Adding the user has been complete!");
+                    } else if(as.insert(username, password, email, firstname, lastname, active) == 1) {
+                        request.setAttribute("unaddUser1", "Please fill in the form!");
                     } else {
-                        request.setAttribute("unaddUser", "Please fill in the form!");
-                    } break;
+                        request.setAttribute("unaddUser2", "UserName already exsit!");
+                    } 
+                    break;
                 case "category_add":
                     if (cs.insert(categoryName)) {
                         request.setAttribute("addCategory", "Adding the Category has been complete!");
